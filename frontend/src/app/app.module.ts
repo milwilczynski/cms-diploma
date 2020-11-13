@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { UserComponent } from './components/user/user.component';
 import { UserService } from './service/user.service';
-
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TitlebarComponent } from './components/titlebar/titlebar.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, UserComponent],
+  declarations: [AppComponent, HomeComponent, UserComponent, NavbarComponent, TitlebarComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [UserService],
   bootstrap: [AppComponent],
