@@ -7,8 +7,10 @@
   height: 30px;
 }
 .sidebar {
+  flex: 0.15;
   height: calc(100vh - 30px);
 }
 .main {
+  flex: 0.75;
   height: calc(100vh - 30px);
 }

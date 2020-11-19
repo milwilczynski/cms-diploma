@@ -9,8 +9,16 @@ import { UserComponent } from './components/user/user.component';
 import { UserService } from './service/user.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TitlebarComponent } from './components/titlebar/titlebar.component';
+import { LoginComponent } from './components/login/login.component';
 @NgModule({
-  declarations: [AppComponent, HomeComponent, UserComponent, NavbarComponent, TitlebarComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    UserComponent,
+    NavbarComponent,
+    TitlebarComponent,
+    LoginComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [UserService],
   bootstrap: [AppComponent],
