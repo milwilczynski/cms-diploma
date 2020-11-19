@@ -2,6 +2,7 @@ import { response } from "express";
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../../config/database");
+const { Op } = require("sequelize");
 const { User, registerValidate, loginValidate } = require("../../models/User");
 
 const userEndpoint = (router) => {
@@ -27,7 +28,7 @@ const userEndpoint = (router) => {
     //check mail and login
     const emailExist = await User.findOne({
       where: {
-        login: request.body.login,
+        [Op.or]: [{ email: request.body.email }, { login: request.body.login }],
       },
     });
     if (emailExist)
@@ -63,11 +64,11 @@ const userEndpoint = (router) => {
     //check mail and login
     const user = await User.findOne({
       where: {
-        login: request.body.login,
+        email: request.body.email,
       },
     });
     if (!user)
-      return response.status(404).send("Email/Login or password is incorrect.");
+      return response.status(404).send("Email or password is incorrect.");
     //password is correct
     const validPass = await bcrypt.compare(
       request.body.password,

@@ -10,20 +10,20 @@ POST http://localhost:8080/api/user/create HTTP/1.1
 content-type: application/json
 
 {
-    "login": "admisness",
+    "login": "admiasdasdasdsn",
     "password": "ziomek",
-    "email": "ziome12sk@gmail.com",
+    "email": "ziome122222sk@gmail.com",
     "name": "ziomowit",
     "surname": "ziomkowski"
 }
 
 ###
-#Login for User
+#Login for User with JWT response
 ###
 POST http://localhost:8080/api/user/login HTTP/1.1
 content-type: application/json
 
 {
-    "login": "admisness",
+    "email": "ziome122222sk@gmail.co",
     "password": "ziomek"
 }

@@ -17,9 +17,14 @@ const registerValidate = (data) => {
   return schema.validate(data);
 };
 
+/**
+ * TODO:
+ * Log-in to server with login or email
+ * @param {} data
+ */
 const loginValidate = (data) => {
   const schema = Joi.object({
-    login: Joi.string().min(5).required(),
+    email: Joi.string().min(6).required().email(),
     password: Joi.string().min(6).required(),
   });
   return schema.validate(data);
