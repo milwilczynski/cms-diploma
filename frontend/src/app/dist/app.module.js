@@ -7,6 +7,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.AppModule = void 0;
+var auth_interceptor_1 = require("./service/auth/auth.interceptor");
+var auth_service_1 = require("./service/auth/auth.service");
 var platform_browser_1 = require("@angular/platform-browser");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
@@ -18,6 +20,7 @@ var user_service_1 = require("./service/user.service");
 var navbar_component_1 = require("./components/navbar/navbar.component");
 var titlebar_component_1 = require("./components/titlebar/titlebar.component");
 var login_component_1 = require("./components/login/login.component");
+var forms_1 = require("@angular/forms");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -31,8 +34,16 @@ var AppModule = /** @class */ (function () {
                 titlebar_component_1.TitlebarComponent,
                 login_component_1.LoginComponent,
             ],
-            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, http_1.HttpClientModule],
-            providers: [user_service_1.UserService],
+            imports: [platform_browser_1.BrowserModule, app_routing_module_1.AppRoutingModule, http_1.HttpClientModule, forms_1.FormsModule],
+            providers: [
+                user_service_1.UserService,
+                auth_service_1.AuthService,
+                {
+                    provide: http_1.HTTP_INTERCEPTORS,
+                    useClass: auth_interceptor_1.AuthInterceptor,
+                    multi: true
+                },
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

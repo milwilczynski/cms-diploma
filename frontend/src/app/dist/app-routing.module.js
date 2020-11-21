@@ -7,6 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 exports.__esModule = true;
 exports.AppRoutingModule = void 0;
+var auth_guard_1 = require("./service/auth/auth.guard");
 var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var home_component_1 = require("./components/home/home.component");
@@ -14,7 +15,8 @@ var login_component_1 = require("./components/login/login.component");
 var routes = [
     {
         path: '',
-        component: home_component_1.HomeComponent
+        component: home_component_1.HomeComponent,
+        canActivate: [auth_guard_1.AuthGuard]
     },
     {
         path: 'login',

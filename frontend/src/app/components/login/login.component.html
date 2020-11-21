@@ -4,6 +4,8 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Adres email</label>
         <input
+          [(ngModel)]="credentials.email"
+          name="email"
           type="email"
           class="form-control"
           id="exampleInputEmail1"
@@ -14,13 +16,17 @@
       <div class="form-group">
         <label for="exampleInputPassword1">Hasło</label>
         <input
+          [(ngModel)]="credentials.password"
+          name="password"
           type="password"
           class="form-control"
           id="exampleInputPassword1"
           placeholder="Wpisz hasło"
         />
       </div>
-      <button type="submit" class="btn btn-primary">Zaloguj</button>
+      <button (click)="signIn()" type="submit" class="btn btn-primary">
+        Zaloguj
+      </button>
     </form>
   </div>
 </div>
