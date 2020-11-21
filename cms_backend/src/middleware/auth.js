@@ -12,3 +12,5 @@ function auth(request, response, next) {
     response.status(400).send("Invalid token");
   }
 }
+
+module.export = auth;

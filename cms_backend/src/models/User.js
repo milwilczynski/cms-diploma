@@ -1,7 +1,8 @@
 import Joi from "@hapi/joi";
+import applicationException from "../exceptions/applicationException";
+const { ValidationError, Op } = require("sequelize");
 const Sequelize = require("sequelize");
 const db = require("../config/database");
-
 /**
  * User validation schema
  * @param {} data
@@ -43,12 +44,17 @@ const User = db.define(
     },
     login: {
       type: Sequelize.STRING,
+      unique: true,
+      allowNull: false,
     },
     password: {
       type: Sequelize.STRING,
+      allowNull: false,
     },
     email: {
       type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
     },
     name: {
       type: Sequelize.STRING,
@@ -57,7 +63,21 @@ const User = db.define(
       type: Sequelize.STRING,
     },
   },
-  { timestamps: false }
+  {
+    timestamps: false,
+    validate: {
+      async isEmailOrLoginUnique() {
+        const user = await User.findOne({
+          where: {
+            [Op.or]: [{ email: this.email }, { login: this.login }],
+          },
+        });
+        if (user) {
+          throw new Error("Email or Login already in use!");
+        }
+      },
+    },
+  }
 );
 
 User.associate = (models) => {
@@ -69,8 +89,34 @@ User.associate = (models) => {
   });
 };
 
+async function getByEmailOrLogin(data) {
+  const result = await User.findOne({
+    where: {
+      [Op.or]: [{ email: data }, { login: data }],
+    },
+  });
+  if (result) {
+    return result;
+  }
+  throw applicationException.new(
+    applicationException.NOT_FOUND,
+    "User not found"
+  );
+}
+
+async function createNew(user) {
+  try {
+    const data = await User.build(user).save();
+    return data;
+  } catch (error) {
+    return error.errors[0].message;
+  }
+}
+
 module.exports = {
   User: User,
   registerValidate: registerValidate,
   loginValidate: loginValidate,
+  createNew: createNew,
+  getByEmailOrLogin: getByEmailOrLogin,
 };
