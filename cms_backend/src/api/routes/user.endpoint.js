@@ -1,7 +1,5 @@
 import { response } from "express";
 const jwt = require("jsonwebtoken");
-const db = require("../../config/database");
-const { Op } = require("sequelize");
 import business from "../../business/business.container";
 import applicationException from "../../exceptions/applicationException";
 
@@ -9,13 +7,14 @@ const userEndpoint = (router) => {
   /**
    * Endpoint which shows all users in db.
    */
-  router.get("/api/user", async (request, response, next) =>
-    User.findAll()
-      .then((users) => {
-        response.send(users);
-      })
-      .catch((err) => console.log(err))
-  );
+  router.get("/api/user", async (request, response, next) => {
+    try {
+      let result = await business().getUserManager().getAllUsers();
+      response.status(200).send(result);
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
+  });
 
   /**
    * Endpoints which creates user - checking if mail/login is taken

@@ -2,12 +2,14 @@
   "name": "cms-diploma",
   "version": "1.0.0",
   "description": "cms",
-  "main": "app.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && babel src --out-dit build",
+    "start": "node build/app.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "Milosz Wilczynski",
   "license": "ISC",
@@ -20,13 +22,19 @@
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.5.0",
     "pg-hstore": "^2.3.3",
+    "regenerator-runtime": "^0.13.7",
     "sequelizer": "^1.1.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/core": "^7.12.7",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/register": "^7.12.1",
+    "babel-eslint": "^10.1.0",
     "cors": "^2.8.5",
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "nodemon": "^2.0.6",
     "sequelize-cli": "^6.2.0"
   }

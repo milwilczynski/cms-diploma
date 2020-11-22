@@ -1,5 +1,5 @@
 import applicationException from "../exceptions/applicationException";
-import User from "../models/User";
+import models from "../models/index";
 import bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 
@@ -8,6 +8,27 @@ function create(context) {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     return hashedPassword;
+  }
+
+  async function getAllUsers() {
+    let users = await models.user.findAll({
+      include: [
+        {
+          nested: false,
+          model: models.user_passwords,
+          attributes: ["password"],
+        },
+        {
+          model: models.roles,
+          attributes: ["name"],
+          through: { attributes: [] },
+        },
+      ],
+    });
+    users.forEach((element) => {
+      //
+    });
+    return users;
   }
 
   async function createNew(userData) {
@@ -39,6 +60,7 @@ function create(context) {
   return {
     createNew: createNew,
     authenticate: authenticate,
+    getAllUsers: getAllUsers,
   };
 }
 
