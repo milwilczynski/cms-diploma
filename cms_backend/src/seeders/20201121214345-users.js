@@ -6,33 +6,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const date = new Date();
     //Creating User Roles
-    const roleIds = await queryInterface.bulkInsert(
-      "roles",
-      [
-        {
-          name: "Administrator",
-          description: "Administrator ma dostep do każdego elementu aplikacji",
-          createdAt: date,
-          updatedAt: date,
-        },
-        {
-          name: "Zarządca Strony",
-          description:
-            "Zarządca Strony ma dostep do większości elementów aplikacji",
-          createdAt: date,
-          updatedAt: date,
-        },
-        {
-          name: "Pracownik",
-          description:
-            "Pracownik ma dostep do ściślę określonych elementów aplikacji",
-          createdAt: date,
-          updatedAt: date,
-        },
-      ],
-      { returning: true }
-    );
-
+  
     const userId = await queryInterface.bulkInsert(
       "users",
       [
@@ -83,36 +57,10 @@ module.exports = {
         updatedAt: date,
       },
     ]);
-    await queryInterface.bulkInsert(
-      "user_roles",
-      [
-        {
-          userId: userId[0]["id"],
-          roleId: roleIds[0]["id"],
-          createdAt: date,
-          updatedAt: date,
-        },
-        {
-          userId: userId[1]["id"],
-          roleId: roleIds[1]["id"],
-          createdAt: date,
-          updatedAt: date,
-        },
-        {
-          userId: userId[2]["id"],
-          roleId: roleIds[2]["id"],
-          createdAt: date,
-          updatedAt: date,
-        },
-      ],
-      {}
-    );
   },
 
   down: async (queryInterface, Sequelize) => {
     await queryInterface.bulkDelete("users", null, {});
     await queryInterface.bulkDelete("user_passwords", null, {});
-    await queryInterface.bulkDelete("user_roles", null, {});
-    await queryInterface.bulkDelete("roles", null, {});
   },
 };
