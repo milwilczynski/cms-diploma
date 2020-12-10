@@ -1,15 +1,13 @@
-import { response } from "express";
-const jwt = require("jsonwebtoken");
-import business from "../../business/business.container";
-import applicationException from "../../exceptions/applicationException";
+import business from '../../business/business.container';
+import applicationException from '../../exceptions/applicationException';
 
 const userEndpoint = (router) => {
   /**
    * Endpoint which shows all users in db.
    */
-  router.get("/api/user", async (request, response, next) => {
+  router.get('/api/user', async (request, response, next) => {
     try {
-      let result = await business().getUserManager().getAllUsers();
+      const result = await business().getUserManager().getAllUsers();
       response.status(200).send(result);
     } catch (error) {
       applicationException.errorHandler(error, response);
@@ -20,9 +18,9 @@ const userEndpoint = (router) => {
    * Endpoints which creates user - checking if mail/login is taken
    * then hashes password
    */
-  router.post("/api/user/create", async (request, response, next) => {
+  router.post('/api/user/create', async (request, response, next) => {
     try {
-      let result = await business(request)
+      const result = await business(request)
         .getUserManager(request)
         .createNew(request.body);
       response.status(200).send(result);
@@ -34,9 +32,9 @@ const userEndpoint = (router) => {
   /**
    * Endpoint which allow to login user onto server
    */
-  router.post("/api/user/auth", async (request, response, next) => {
+  router.post('/api/user/auth', async (request, response, next) => {
     try {
-      let result = await business(request)
+      const result = await business(request)
         .getUserManager(request)
         .authenticate(request.body.email, request.body.password);
       response.status(200).send(result);

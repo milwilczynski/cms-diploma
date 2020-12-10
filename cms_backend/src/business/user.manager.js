@@ -1,7 +1,8 @@
-import applicationException from "../exceptions/applicationException";
-import models from "../models/index";
-import bcrypt from "bcryptjs";
-import * as jwt from "jsonwebtoken";
+/* eslint-disable prettier/prettier */
+import bcrypt from 'bcryptjs';
+import * as jwt from 'jsonwebtoken';
+import applicationException from '../exceptions/applicationException';
+import models from '../models/index';
 
 function create(context) {
   async function generateHash(password) {
@@ -11,45 +12,44 @@ function create(context) {
   }
 
   async function getAllUsers() {
-    let users = await models.user.findAll({
+    const users = await models.user.findAll({
       include: [
         {
           nested: false,
           model: models.user_passwords,
-          attributes: ["password"],
+          attributes: ['password'],
         },
         {
           model: models.roles,
-          attributes: ["name"],
+          attributes: ['name'],
           through: { attributes: [] },
         },
       ],
     });
-    users.forEach((element) => {
-      //
-    });
+
     return users;
   }
 
   async function createNew(userData) {
-    userData.password = await generateHash(userData.password);
-    const user = await User.createNew(userData);
+    const tempData = userData;
+    tempData.password = await generateHash(userData.password);
+    const user = await models.User.createNew(tempData);
     return user;
   }
 
   async function authenticate(email, password) {
-    const user = await User.getByEmailOrLogin(email);
+    const user = await models.User.getByEmailOrLogin(email);
     if (!user) {
       throw applicationException.new(
         applicationException.UNAUTHORIZED,
-        "User with that email does not exist"
+        'User with that email does not exist',
       );
     }
 
     if (!(await bcrypt.compare(password, user.password))) {
       throw new applicationException.new(
         applicationException.UNAUTHORIZED,
-        "Incorrect Password"
+        'Incorrect Password',
       );
     }
 
@@ -58,12 +58,12 @@ function create(context) {
   }
 
   return {
-    createNew: createNew,
-    authenticate: authenticate,
-    getAllUsers: getAllUsers,
+    createNew,
+    authenticate,
+    getAllUsers,
   };
 }
 
 export default {
-  create: create,
+  create,
 };
