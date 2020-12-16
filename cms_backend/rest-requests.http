@@ -1,1 +1,49 @@
+###
+#Shows all users in db
+###
 GET http://localhost:8080/api/user
+
+###
+#Creates User
+###
+POST http://localhost:8080/api/user/create HTTP/1.1
+content-type: application/json
+
+{
+    "login": "test",
+    "password": "test",
+    "email": "test@gmail.com",
+    "name": "milek",
+    "surname": "wilk"
+}
+
+
+###
+#Login for User with JWT response
+###
+POST http://localhost:8080/api/user/auth HTTP/1.1
+content-type: application/json
+
+{
+    "emailorlogin": "te1st",
+    "password": "test"
+}
+
+###
+POST http://localhost:8080/api/sites/htmlcontent HTTP/1.1
+content-type: application/json
+
+{
+    "dom": "#footer",
+    "file": "index.html"
+}
+
+###
+POST http://localhost:8080/api/sites/htmlcontent/update HTTP/1.1
+content-type: application/json
+
+{
+    "dom": "#footer",
+    "content": "Zmieniony fo2oter :)",
+    "file": "index.html"
+}

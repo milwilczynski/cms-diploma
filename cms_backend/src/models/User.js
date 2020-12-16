@@ -1,26 +1,60 @@
-const Sequelize = require("sequelize");
-const db = require("../config/database");
+"use strict";
+const { Model } = require("sequelize");
+const {  ValidationError,  Op } = require("sequelize");
 
-const User = db.define(
-  "user",
-  {
-    login: {
-      type: Sequelize.STRING,
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      User.hasOne(models.user_passwords, {
+        foreignKey: {
+          name: "userId", allowNull: false
+        }
+      });
+    }
+  }
+  User.init(
+    {
+      login: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+      },
+      surname: {
+        type: DataTypes.STRING,
+      },
     },
-    password: {
-      type: Sequelize.STRING,
-    },
-    email: {
-      type: Sequelize.STRING,
-    },
-    name: {
-      type: Sequelize.STRING,
-    },
-    surname: {
-      type: Sequelize.STRING,
-    },
-  },
-  { timestamps: false }
-);
+    {
+      sequelize,
+      modelName: "user",
+      validate: {
+        async isEmailOrLoginUnique() {
+          const user = await User.findOne({
+            where: {
+              [Op.or]: [{ email: this.email }, { login: this.login }],
+            },
+          });
+          if (user) {
+            throw new Error("Email or Login already in use!");
+          }
+        },
+      },
+    }
+  );
 
-module.exports = User;
+
+  return User;
+    
+};

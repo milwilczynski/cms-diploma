@@ -2,28 +2,45 @@
   "name": "cms-diploma",
   "version": "1.0.0",
   "description": "cms",
-  "main": "app.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && babel src --out-dit build",
+    "start": "node build/app.js",
+    "dev": "nodemon ./src/index.js"
   },
   "author": "Milosz Wilczynski",
   "license": "ISC",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.0",
     "pg": "^8.5.0",
     "pg-hstore": "^2.3.3",
-    "sequelizer": "^1.1.4"
+    "regenerator-runtime": "^0.13.7",
+    "sequelizer": "^1.1.4",
+    "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/core": "^7.12.7",
+    "@babel/node": "^7.12.6",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/register": "^7.12.1",
+    "babel-eslint": "^10.1.0",
     "cors": "^2.8.5",
-    "nodemon": "^2.0.6"
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.6",
+    "sequelize-cli": "^6.2.0"
   }
 }
