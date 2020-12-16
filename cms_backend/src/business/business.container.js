@@ -1,5 +1,7 @@
-"use strict";
-import userManager from "./user.manager";
+/* eslint-disable no-unused-vars */
+import fileUtility from '../utility/fileUtility';
+import userManager from './user.manager';
+
 function getContext(request) {
   return { user: request && request.user };
 }
@@ -10,10 +12,9 @@ function getter(manager, request) {
   };
 }
 
-const createBusinessContainer = (request, config) => {
-  return {
-    getUserManager: getter(userManager, request),
-  };
-};
+const createBusinessContainer = (request, config) => ({
+  getUserManager: getter(userManager, request),
+  getFileUtility: getter(fileUtility, request),
+});
 
 export default createBusinessContainer;
