@@ -9,7 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       UserPasswords.belongsTo(models.user, {
-        foreignKey: "userId",
+        foreignKey: {
+          name: "userId", allowNull: false
+        }
       });
     }
   }

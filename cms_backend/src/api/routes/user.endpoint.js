@@ -2,6 +2,7 @@ import business from '../../business/business.container';
 import applicationException from '../../exceptions/applicationException';
 
 const userEndpoint = (router) => {
+
   /**
    * Endpoint which shows all users in db.
    */
@@ -20,8 +21,8 @@ const userEndpoint = (router) => {
    */
   router.post('/api/user/create', async (request, response, next) => {
     try {
-      const result = await business(request)
-        .getUserManager(request)
+      const result = await business()
+        .getUserManager()
         .createNew(request.body);
       response.status(200).send(result);
     } catch (error) {
@@ -34,9 +35,9 @@ const userEndpoint = (router) => {
    */
   router.post('/api/user/auth', async (request, response, next) => {
     try {
-      const result = await business(request)
-        .getUserManager(request)
-        .authenticate(request.body.email, request.body.password);
+      const result = await business()
+        .getUserManager()
+        .authenticate(request.body.emailorlogin, request.body.password);
       response.status(200).send(result);
     } catch (error) {
       applicationException.errorHandler(error, response);

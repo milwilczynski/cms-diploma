@@ -17,6 +17,7 @@
     "@hapi/joi": "^17.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
@@ -24,7 +25,8 @@
     "pg": "^8.5.0",
     "pg-hstore": "^2.3.3",
     "regenerator-runtime": "^0.13.7",
-    "sequelizer": "^1.1.4"
+    "sequelizer": "^1.1.4",
+    "serve-index": "^1.9.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.7",

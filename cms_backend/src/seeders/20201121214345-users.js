@@ -1,12 +1,14 @@
 "use strict";
-
 const { query } = require("express");
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    const bcrypt = require('bcryptjs')
     const date = new Date();
     //Creating User Roles
-  
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash("admin", salt);
+
     const userId = await queryInterface.bulkInsert(
       "users",
       [
@@ -40,19 +42,19 @@ module.exports = {
     await queryInterface.bulkInsert("user_passwords", [
       {
         userId: userId[0]["id"],
-        password: "admin",
+        password: password,
         createdAt: date,
         updatedAt: date,
       },
       {
         userId: userId[1]["id"],
-        password: "admin",
+        password: password,
         createdAt: date,
         updatedAt: date,
       },
       {
         userId: userId[2]["id"],
-        password: "admin",
+        password: password,
         createdAt: date,
         updatedAt: date,
       },

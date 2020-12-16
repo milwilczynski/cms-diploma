@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const {  ValidationError,  Op } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -9,7 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       User.hasOne(models.user_passwords, {
-        foreignKey: "userId",
+        foreignKey: {
+          name: "userId", allowNull: false
+        }
       });
     }
   }
@@ -35,7 +39,22 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "user",
+      validate: {
+        async isEmailOrLoginUnique() {
+          const user = await User.findOne({
+            where: {
+              [Op.or]: [{ email: this.email }, { login: this.login }],
+            },
+          });
+          if (user) {
+            throw new Error("Email or Login already in use!");
+          }
+        },
+      },
     }
   );
+
+
   return User;
+    
 };
