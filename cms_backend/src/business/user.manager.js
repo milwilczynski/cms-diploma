@@ -2,8 +2,13 @@
 import bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import applicationException from '../exceptions/applicationException';
-import models, { sequelize } from '../models/index';
-import {  ValidationError,  Op } from "sequelize";
+import models, {
+  sequelize
+} from '../models/index';
+import {
+  ValidationError,
+  Op
+} from "sequelize";
 
 function create(context) {
   async function generateHash(password) {
@@ -27,24 +32,28 @@ function create(context) {
   async function createNew(userData) {
     const transaction = await sequelize.transaction();
 
-    try{
+    try {
       const tempData = userData;
       tempData.password = await generateHash(userData.password);
       const user = await models.user.create({
-            login: tempData.login,
-            email: tempData.email,
-            name: tempData.name,
-            surname: tempData.surname
-      }, {transaction });
+        login: tempData.login,
+        email: tempData.email,
+        name: tempData.name,
+        surname: tempData.surname
+      }, {
+        transaction
+      });
 
       const password = await models.user_passwords.create({
         userId: user.id,
         password: tempData.password
-      }, {transaction});
+      }, {
+        transaction
+      });
 
       await transaction.commit();
       return user;
-    }catch(error){
+    } catch (error) {
       await transaction.rollback();
       return error;
     }
@@ -52,7 +61,7 @@ function create(context) {
   }
 
   async function authenticate(data, password) {
-    try{
+    try {
       const user = await models.user.findOne({
         where: {
           [Op.or]: [{
@@ -88,10 +97,10 @@ function create(context) {
         id: user.id
       }, process.env.TOKEN_SECRET);
       return token;
-    }catch(error){
+    } catch (error) {
       return error;
     }
-  
+
   }
 
   return {

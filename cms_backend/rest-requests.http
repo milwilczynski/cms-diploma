@@ -30,6 +30,8 @@ content-type: application/json
 }
 
 ###
+#Gets DOM selector content from html file
+###
 POST http://localhost:8080/api/sites/htmlcontent HTTP/1.1
 content-type: application/json
 
@@ -39,11 +41,18 @@ content-type: application/json
 }
 
 ###
+#Updates DOM selector content within html file
+###
 POST http://localhost:8080/api/sites/htmlcontent/update HTTP/1.1
 content-type: application/json
 
 {
     "dom": "#footer",
-    "content": "Zmieniony fo2oter :)",
+    "content": "Zmieni2ony fo2oter :)",
     "file": "index.html"
 }
+
+###
+#Adds html file to public/sites then to db
+###
+POST    
