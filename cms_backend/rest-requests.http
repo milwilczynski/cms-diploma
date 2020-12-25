@@ -53,6 +53,8 @@ content-type: application/json
 }
 
 ###
-#Adds html file to public/sites then to db
+#Deletes html file to public/sites then from db
 ###
-POST    
+GET http://localhost:8080/api/sites/4/delete HTTP/1.1
+content-type: application/json
+

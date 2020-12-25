@@ -12,7 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SiteAdderComponent } from './modules/site/site-adder/site-adder.component';
 import { DomEditorComponent } from './modules/site/dom-editor/dom-editor.component';
 import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-dashboard.component';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -29,7 +29,8 @@ import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-da
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

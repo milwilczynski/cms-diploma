@@ -1,1 +1,25 @@
-<p>sites-dashboard works!</p>
+<div class="w-100 justify-content-center">
+  <div class="table-wrapper mt-2 d-flex justify-content-center">
+    <table class="table table-light table-width table-hover table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Main Editor</th>
+          <th scope="col">Page Name</th>
+          <th scope="col">Page Url</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of site">
+          <td>{{item.roleId}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.url}}</td>
+          <td>
+            <fa-icon [icon]="faEye" routerLink="/sites/domeditor" class="mr-2"></fa-icon>
+            <fa-icon [icon]="faPen" class="mr-2"></fa-icon>
+            <fa-icon (click)="deletePage(item.id)" [icon]="faTrashAlt"></fa-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

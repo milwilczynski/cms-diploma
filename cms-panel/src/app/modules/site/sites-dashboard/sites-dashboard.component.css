@@ -1,0 +1,18 @@
+.table-width{
+  width: 75% !important;
+  border-top-width: 0px;
+}
+
+fa-icon{
+  cursor: pointer;
+  padding: 10px;
+  transition-duration: 1s;
+}
+
+fa-icon:focus{
+  outline: 0;
+}
+
+fa-icon:hover{
+background-color: teal;
+}

@@ -1,11 +1,21 @@
   <div class="text-white" id="sidebar-wrapper">
-    <div class="sidebar-heading color bg-teal d-flex justify-content-center"><span class="display-4" style="font-size: 42px !important; font-style: italic;">Wholedit</span></div>
+    <div class="sidebar-heading color bg-teal d-flex justify-content-center"><span class="display-4"
+        style="font-size: 42px !important; font-style: italic;">Wholedit</span></div>
     <div class="list-group list-group-flush">
       <a href="#" routerLink="/dashboard" class="list-group-item list-group-item-action bg-dark text-white fs-12">
-        <fa-icon [icon]="faChart" class="mr-1"></fa-icon>
-        Dashboard
+        <fa-icon [icon]="faChart" class="pr-1"></fa-icon>Dashboard
       </a>
-      <a href="#" class="list-group-item list-group-item-action text-white bg-dark text-white fs-12">Shortcuts</a>
+      <a href="#" (click)="togglePages()" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" class="list-group-item list-group-item-action text-white bg-dark text-white fs-12">
+        <fa-icon [icon]="faFile" class="mr-2"></fa-icon>Pages<fa-icon [icon]="faAngle" [ngClass]="{'pagesClicked': isPagesClicked }" class="arrow-pages float-right"></fa-icon>
+      </a>
+      <div class="pl-3 collapse" id="collapseExample">
+        <a href="#" routerLink="/sites" class="list-group-item list-group-item-action text-white bb-none bg-dark text-white fs-12">
+          <fa-icon [icon]="faChart"  class="pr-2"></fa-icon>Dashboard
+        </a>
+        <a href="#" routerLink="/sites/add" class="list-group-item list-group-item-action text-white bb-none bg-dark text-white fs-12">
+          <fa-icon [icon]="faPlusSqure" class="pr-2"></fa-icon>New Page
+        </a>
+      </div>
       <a href="#" class="list-group-item list-group-item-action text-white bg-dark text-white fs-12">Overview</a>
       <a href="#" class="list-group-item list-group-item-action text-white bg-dark text-white fs-12">Events</a>
       <a href="#" class="list-group-item list-group-item-action text-white bg-dark text-white fs-12">Profile</a>

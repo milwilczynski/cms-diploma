@@ -1,5 +1,6 @@
 import fs from "fs";
 import applicationException from "../exceptions/applicationException";
+import applicationMessage from "../resources/applicationMessage";
 var multer = require('multer')
 
 function create(context) {
@@ -41,6 +42,10 @@ function create(context) {
         }
     }
 
+    /**
+     * Uploads file to server
+     * @param {*} file 
+     */
     function uploadHtml(file) {
         const maxSize = 1 * 1000 * 1000;
 
@@ -63,10 +68,30 @@ function create(context) {
         return upload.single(file);
     }
 
+    /**
+     * deletes file from server
+     * @param {*} file 
+     */
+    function deleteHtml(path) {
+        try {
+            fs.unlinkSync(path);
+            return applicationMessage.new(applicationMessage.OK, 'File has been deleted');
+        } catch (error) {
+            if (error.code = "ENOENT") {
+                throw applicationException.new(
+                    applicationException.NOT_FOUND,
+                    'No such file or directory: ' + error.path,
+                );
+            }
+            return error;
+        }
+    }
+
     return {
         updateFile,
         reader,
         uploadHtml,
+        deleteHtml
     }
 }
 

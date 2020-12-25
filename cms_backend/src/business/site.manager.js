@@ -1,12 +1,14 @@
 import utility from "./../utility/utility.container";
 const cheerio = require('cheerio');
 import models, {
-  sequelize
+    sequelize
 } from '../models/index';
 import {
-  ValidationError,
-  Op
+    ValidationError,
+    Op
 } from "sequelize";
+import applicationMessage from "../resources/applicationMessage";
+import applicationException from "../exceptions/applicationException";
 
 function create(context) {
     /**
@@ -62,7 +64,7 @@ function create(context) {
     async function addSite(request) {
         const transaction = await sequelize.transaction();
         try {
-            const site = await models.site.create({
+            await models.site.create({
                 roleId: 1,
                 name: request.file.filename,
                 url: request.file.path
@@ -70,9 +72,43 @@ function create(context) {
                 transaction
             });
             await transaction.commit()
-            return "Success";
+            return applicationMessage.new(applicationMessage.CREATED, 'Page has been added');
         } catch (error) {
             await transaction.rollback();
+            return error;
+        }
+    }
+
+    /**
+     * deletes site from server and db
+     * @param {*} request 
+     */
+    async function deleteSite(id){
+        try{
+            const site = await models.site.findOne({
+                where: {
+                 id: id  
+                }
+            });
+            if(site == null){
+                throw applicationException.new(applicationException.NOT_FOUND, 'Page not found');
+            }
+            const data = await utility().getFileUtility().deleteHtml(site.url);
+            await site.destroy();
+            if(data.error){
+                return data;
+            }
+            return applicationMessage.new(applicationMessage.OK, 'Page has been deleted');
+        }catch(error){
+            return error;
+        }
+
+    }
+
+    async function getAllSites() {
+        try {
+            return models.site.findAll();
+        } catch (error) {
             return error;
         }
     }
@@ -80,7 +116,9 @@ function create(context) {
     return {
         updateHtmlContent,
         getHtmlContent,
-        addSite
+        addSite,
+        deleteSite,
+        getAllSites,
     };
 }
 
