@@ -2,7 +2,6 @@ import business from '../../business/business.container';
 import applicationException from '../../exceptions/applicationException';
 import utility from "../../utility/utility.container";
 import multer from "multer";
-import e from 'express';
 import applicationMessage from '../../resources/applicationMessage';
 const sitesEndpoint = (router) => {
 
