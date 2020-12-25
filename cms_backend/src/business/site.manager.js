@@ -18,9 +18,20 @@ function create(context) {
      * @param {string} dom 
      * @param {url} file 
      */
-    async function getHtmlContent(dom, file) {
+    async function getHtmlContent(dom, id) {
         try {
-            const data = await utility().getFileUtility().reader(file);
+            const site = await models.site.findOne({
+                where: {
+                    id: id
+                }
+            });
+            if (site == null) {
+                throw applicationException.new(
+                    applicationException.NOT_FOUND,
+                    'Provied file not found',
+                );
+            }
+            const data = await utility().getFileUtility().reader(site.url);
             const $ = cheerio.load(data);
             const html = $(dom).html();
             if (!html) {
@@ -29,10 +40,10 @@ function create(context) {
                     'Provied DOM selector does not exist',
                 );
             }
-            const site = {
+            const template = {
                 html: html
             };
-            return site;
+            return template;
         } catch (error) {
             return error;
         }
@@ -83,24 +94,24 @@ function create(context) {
      * deletes site from server and db
      * @param {*} request 
      */
-    async function deleteSite(id){
-        try{
+    async function deleteSite(id) {
+        try {
             const site = await models.site.findOne({
                 where: {
-                 id: id  
+                    id: id
                 }
             });
-            if(site == null){
+            if (site == null) {
                 throw applicationException.new(applicationException.NOT_FOUND, 'Page not found');
             }
             const data = await utility().getFileUtility().deleteHtml(site.url);
             await site.destroy();
-            if(data.error){
+            if (data.error) {
                 return data;
             }
             return applicationMessage.new(applicationMessage.OK, 'Page has been deleted');
-        }catch(error){
-            return error;
+        } catch (error) {
+            throw error;
         }
 
     }

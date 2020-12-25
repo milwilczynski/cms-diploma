@@ -3,11 +3,12 @@ import applicationException from '../../exceptions/applicationException';
 import utility from "../../utility/utility.container";
 import multer from "multer";
 import e from 'express';
+import applicationMessage from '../../resources/applicationMessage';
 const sitesEndpoint = (router) => {
 
   router.post('/api/sites/htmlcontent', async (request, response, next) => {
     try {
-      const result = await business().getSiteManager().getHtmlContent(request.body.dom, request.body.file)
+      const result = await business().getSiteManager().getHtmlContent(request.body.dom, request.body.id)
       response.status(200).send(result);
     } catch (error) {
       applicationException.errorHandler(error, response);
@@ -48,7 +49,8 @@ const sitesEndpoint = (router) => {
   router.get('/api/sites/:id/delete', async (request, response, next) => {
     try {
       const result = await business().getSiteManager().deleteSite(request.params.id);
-      response.status(200).send(result);
+      //response.status(200).send(result);
+      applicationMessage.statusHandler(result, response);
     } catch (error) {
       applicationException.errorHandler(error, response);
     }

@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { catchError, map, retry, tap } from 'rxjs/operators';
 import { Site } from './site';
+
+export interface HTML{
+  html: any;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +38,11 @@ export class SiteService {
 
   deleteSite(id: number){
     return this.http.get(this.url + '/' + id + '/delete');
+  }
+
+  getBody(id: number){
+    return this.http.post<HTML>(this.url + '/htmlcontent', {dom: '#wrapper', id: id}, {
+      observe: 'response'
+    });
   }
 }

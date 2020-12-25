@@ -11,5 +11,14 @@ export default {
   NO_CONTENT: { message: "NO_CONTENT", code: 204 },
   new: function (status, message) {
     return new ApplicationMessage(status, message);
-  }
+  },
+  statusHandler: function (status, response) {
+    if (status instanceof ApplicationMessage) {
+      response
+        .status(status.status.code)
+        .send(status);
+    } else {
+      response.sendStatus(200);
+    }
+  },
 };

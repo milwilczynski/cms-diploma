@@ -10,7 +10,7 @@ function create(context) {
      */
     function reader(file) {
         try {
-            return fs.readFileSync('public/sites/' + file, 'utf8');
+            return fs.readFileSync(file, 'utf8');
         } catch (error) {
             if (error.code = "ENOENT") {
                 throw applicationException.new(

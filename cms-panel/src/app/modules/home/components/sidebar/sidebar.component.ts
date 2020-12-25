@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faChartBar, faPaperclip, faAngleLeft, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faPaperclip, faAngleLeft, faPlusSquare, faNewspaper, faComment, faUser, faPalette, faCog, faFlag } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -12,7 +12,14 @@ export class SidebarComponent implements OnInit {
   faFile = faPaperclip;
   faAngle = faAngleLeft;
   faPlusSqure = faPlusSquare;
+  faNewsPaper = faNewspaper;
+  faComment = faComment;
+  faUser = faUser;
+  faPallete = faPalette;
+  faCog = faCog;
+  faFlag = faFlag;
   isPagesClicked = false;
+  isPostsClicked = false;
 
   constructor() { }
 
@@ -21,6 +28,10 @@ export class SidebarComponent implements OnInit {
 
   togglePages(){
     this.isPagesClicked = !this.isPagesClicked;
+  }
+
+  togglePosts(){
+    this.isPostsClicked = !this.isPostsClicked;
   }
 
 

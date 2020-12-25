@@ -9,6 +9,8 @@ import { faPen, faTrashAlt, faEye, faPlusSquare } from '@fortawesome/free-solid-
 })
 export class SitesDashboardComponent implements OnInit {
   public site: any;
+  isOnShow = false;
+  variable: number = 0;
   faPen = faPen;
   faTrashAlt = faTrashAlt;
   faEye = faEye;
@@ -29,4 +31,16 @@ export class SitesDashboardComponent implements OnInit {
   deletePage(id: number){
     this.siteService.deleteSite(id);
   }
+
+  toggleViewer(val: boolean){
+    this.isOnShow = val;
+  }
+
+  setUrl(id: number){
+    this.variable = id;
+    if(this.variable != 0){
+      this.toggleViewer(true);
+    }
+  }
+
 }

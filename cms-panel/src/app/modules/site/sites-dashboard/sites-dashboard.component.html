@@ -3,6 +3,7 @@
     <table class="table table-light table-width table-hover table-striped">
       <thead>
         <tr>
+          <th scope="col">ID</th>
           <th scope="col">Main Editor</th>
           <th scope="col">Page Name</th>
           <th scope="col">Page Url</th>
@@ -10,16 +11,19 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of site">
+          <td>{{item.id}}</td>
           <td>{{item.roleId}}</td>
           <td>{{item.name}}</td>
           <td>{{item.url}}</td>
           <td>
-            <fa-icon [icon]="faEye" routerLink="/sites/domeditor" class="mr-2"></fa-icon>
-            <fa-icon [icon]="faPen" class="mr-2"></fa-icon>
-            <fa-icon (click)="deletePage(item.id)" [icon]="faTrashAlt"></fa-icon>
+            <fa-icon data-toggle="tooltip" data-placement="top" title="Show HTML View" (click)="setUrl(item.id);" [icon]="faEye" class="mr-2"></fa-icon>
+            <fa-icon data-toggle="tooltip" data-placement="top" title="Edit HTML Params" [icon]="faPen" class="mr-2"></fa-icon>
+            <fa-icon data-toggle="tooltip" data-placement="top" title="Delete HTML Page" (click)="deletePage(item.id)" [icon]="faTrashAlt"></fa-icon>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
+
+<app-html-viewer [id]='variable' (isOnShow)="toggleViewer($event)" *ngIf="isOnShow"></app-html-viewer>

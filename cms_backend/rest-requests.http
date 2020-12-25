@@ -36,8 +36,8 @@ POST http://localhost:8080/api/sites/htmlcontent HTTP/1.1
 content-type: application/json
 
 {
-    "dom": "#footer",
-    "file": "index.html"
+    "dom": "#wrapper",
+    "id": 13 
 }
 
 ###
@@ -55,6 +55,6 @@ content-type: application/json
 ###
 #Deletes html file to public/sites then from db
 ###
-GET http://localhost:8080/api/sites/4/delete HTTP/1.1
+GET http://localhost:8080/api/sites/12  /delete HTTP/1.1
 content-type: application/json
 

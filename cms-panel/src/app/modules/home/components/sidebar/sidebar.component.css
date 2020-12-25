@@ -1,10 +1,12 @@
 .bb-none{
   border-width: 0px 0px 2px 0px;
 }
-
 .arrow-pages {
   transition: all 0.25s ease-out !important;
 }
-.pagesClicked {
+.clicked {
   transform: rotate(-90deg)
+}
+fa-icon{
+  font-size: 16px;
 }

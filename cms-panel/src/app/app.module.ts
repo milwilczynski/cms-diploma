@@ -13,6 +13,8 @@ import { SiteAdderComponent } from './modules/site/site-adder/site-adder.compone
 import { DomEditorComponent } from './modules/site/dom-editor/dom-editor.component';
 import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HtmlViewerComponent } from './modules/site/html-viewer/html-viewer.component';
+import { ParamsEditorComponent } from './modules/site/params-editor/params-editor.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -24,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     SiteAdderComponent,
     DomEditorComponent,
-    SitesDashboardComponent
+    SitesDashboardComponent,
+    HtmlViewerComponent,
+    ParamsEditorComponent
   ],
   imports: [
     BrowserModule,
