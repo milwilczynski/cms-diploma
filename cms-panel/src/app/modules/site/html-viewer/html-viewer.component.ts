@@ -6,26 +6,29 @@ import { SiteService } from 'src/app/services/site/site.service';
 @Component({
   selector: 'app-html-viewer',
   templateUrl: './html-viewer.component.html',
-  styleUrls: ['./html-viewer.component.css']
+  styleUrls: ['./html-viewer.component.css'],
 })
 export class HtmlViewerComponent implements OnInit {
-  @Input() id!: number;
+  @Input() id!: string;
   @Output() isOnShow = new EventEmitter<boolean>();
   template: any;
   faTimes = faTimes;
-  constructor(public siteService: SiteService,  private domSanitizer: DomSanitizer) {
-  }
+  constructor(
+    public siteService: SiteService,
+    private domSanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
-    this.getInnerHTML(this.id);
+    this.getView();
   }
 
-  close(){
+  getView() {
+    this.siteService.getContent('#wrapper', this.id).subscribe((response) => {
+      this.template = response.html;
+    });
+  }
+
+  close() {
     this.isOnShow.emit(false);
   }
-
-  getInnerHTML(id: number){
-    this.siteService.getBody(id).subscribe(response => this.template = response.body?.html);
-  }
-
 }

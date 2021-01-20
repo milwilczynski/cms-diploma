@@ -1,0 +1,15 @@
+#header {
+  padding: 156px 0 100px;
+}
+
+#menu {
+  height: 50px;
+}
+
+#wrapper {
+  min-height: calc(100vh - 256px);
+}
+
+#footer {
+  height: 100px;
+}

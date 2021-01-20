@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-center m-3 mt-3">
+  <div class="w-50">
+    <div *ngFor="let item of posts; let i = index" class="d-flex w-100">
+      <app-title-show
+        *ngFor="let aItem of pairs[i]"
+        [title]="aItem.title"
+        [url]="aItem.subtitle"
+        [siteName]="aItem.site.title"
+        class="d-flex w-100 p-1 tile"
+        routerLink="/comments/bysiteorpage/{{ aItem.id }}/post"
+      ></app-title-show>
+    </div>
+  </div>
+</div>

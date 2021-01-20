@@ -6,10 +6,14 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       roleId: {
         type: Sequelize.INTEGER,
+      },
+      title: {
+        type: Sequelize.STRING,
+        unique: true,
       },
       name: {
         type: Sequelize.STRING,
@@ -18,17 +22,20 @@ module.exports = {
         type: Sequelize.STRING,
         unique: true,
       },
+      inNav: {
+        type: Sequelize.BOOLEAN,
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('sites');
-  }
+  },
 };

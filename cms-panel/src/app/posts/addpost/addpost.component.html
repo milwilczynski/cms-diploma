@@ -1,0 +1,67 @@
+<div class="bg-white m-3 justify-self-center set-div mt-3">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex">
+      <div class="d-flex justify-content-end flex-column pr-3">
+        <div class="d-flex fs-20 justify-content-end">You're making</div>
+        <div
+          class="d-flex font-weight-bold fs-28 justify-content-end"
+          style="color: teal"
+        >
+          <span class="float-right">Post</span>
+        </div>
+      </div>
+    </div>
+    <div style="width: 85%">
+      <div class="form-group">
+        <label for="exampleFormControlSelect1" class="">Page</label>
+        <select [(ngModel)]="pageId" class="custom-select fs-14">
+          <option
+            *ngFor="let item of sites; let i = index"
+            value="{{ item.id }}"
+            [ngClass]="{ 'font-weight-bold': item.name == 'index.html' }"
+          >
+            {{ item.title }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlInput1">Title</label>
+        <input
+          [(ngModel)]="title"
+          type="title"
+          class="form-control fs-14"
+          id="exampleFormControlInput1"
+          placeholder="TOP 10 VPN Services"
+        />
+      </div>
+
+      <div class="form-group d-flex">
+        <div class="d-flex flex-column w-100">
+          <label for="exampleFormControlInput1">Subtitle</label>
+          <div class="d-flex flex-row">
+            <input
+              [(ngModel)]="subtitle"
+              type="subtitle"
+              class="form-control fs-14"
+              id="exampleFormControlInput1"
+              placeholder="Choose best VPN service with us!"
+            />
+          </div>
+        </div>
+        <div class="d-flex pl-2">
+          <button type="button" class="btn btn-info" (click)="createPost()">
+            Create
+          </button>
+        </div>
+      </div>
+      <hr style="background-color: teal" />
+      <angular-editor
+        style="background-color: rgba(0, 0, 0, 0.1)"
+        [(ngModel)]="content"
+        [placeholder]="content"
+        [config]="editorConfig"
+      >
+      </angular-editor>
+    </div>
+  </div>
+</div>

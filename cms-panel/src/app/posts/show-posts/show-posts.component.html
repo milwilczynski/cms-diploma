@@ -1,0 +1,63 @@
+<div class="bg-white m-3 justify-self-center set-div mt-3">
+  <div
+    *ngFor="let item of posts; let i = index"
+    class="d-flex justify-content-center mt-2 w-100"
+  >
+    <div class="d-flex flex-row w-75 justify-content-center">
+      <div *ngFor="let post of pairs[i]" class="card text-center mr-5 w-50">
+        <div
+          class="card-header p-2 fs-12 font-weight-bold d-flex justify-content-end"
+        >
+          <fa-icon
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Edit Body of HTML"
+            [icon]="faPen"
+            class="mr-2"
+            routerLink="/posts/{{ post.id }}"
+          >
+          </fa-icon>
+          <fa-icon
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Edit Body of HTML"
+            [icon]="faTrashAlt"
+            class="mr-2"
+            (click)="deletePost(post.id)"
+          >
+          </fa-icon>
+        </div>
+        <div class="card-body d-flex flex-column">
+          <div
+            style="color: teal"
+            class="card-title font-weight-bold d-flex border-bottom"
+          >
+            {{ post.title }}
+          </div>
+          <div
+            class="card-title d-flex text-muted fs-12"
+            style="margin-top: -10px"
+          >
+            {{ post.subtitle }}
+          </div>
+          <div class="card-text d-flex fs-15 border-teal">
+            {{ stringCutter(post.content) }}
+          </div>
+        </div>
+        <div
+          class="card-footer p-2 fs-12 d-flex justify-content-between text-muted"
+        >
+          <div>
+            Posted by
+            <span style="color: teal" class="font-weight-bold">{{
+              post.user.login
+            }}</span>
+          </div>
+          <div>
+            {{ splitter(post.createdAt) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

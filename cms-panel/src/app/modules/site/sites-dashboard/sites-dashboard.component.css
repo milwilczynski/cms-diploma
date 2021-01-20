@@ -1,18 +1,26 @@
-.table-width{
+.table-width {
   width: 75% !important;
   border-top-width: 0px;
 }
 
-fa-icon{
+fa-icon {
   cursor: pointer;
   padding: 10px;
   transition-duration: 1s;
 }
 
-fa-icon:focus{
+fa-icon:focus {
   outline: 0;
 }
 
-fa-icon:hover{
-background-color: teal;
+fa-icon:hover {
+  background-color: teal;
+  color: white;
+}
+.set-div {
+  min-height: 50%;
+  padding-top: 2vh;
+  padding-bottom: 5vh;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }

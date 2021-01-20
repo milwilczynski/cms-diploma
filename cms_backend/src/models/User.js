@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
           name: "userId", allowNull: false
         }
       });
+      User.hasOne(models.post, {
+        foreignKey: {
+          name: 'userId', allowNull: false
+        }
+      })
     }
   }
   User.init(

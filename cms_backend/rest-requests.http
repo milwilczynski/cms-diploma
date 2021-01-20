@@ -1,3 +1,7 @@
+##############
+#### USER ####
+##############
+
 ###
 #Shows all users in db
 ###
@@ -29,6 +33,10 @@ content-type: application/json
     "password": "test"
 }
 
+##############
+#### HTML ####
+##############
+
 ###
 #Gets DOM selector content from html file
 ###
@@ -36,8 +44,8 @@ POST http://localhost:8080/api/sites/htmlcontent HTTP/1.1
 content-type: application/json
 
 {
-    "dom": "#wrapper",
-    "id": 13 
+    "dom": "#footer",
+    "url": "public\\sites\\index.html"
 }
 
 ###
@@ -47,14 +55,140 @@ POST http://localhost:8080/api/sites/htmlcontent/update HTTP/1.1
 content-type: application/json
 
 {
-    "dom": "#footer",
-    "content": "Zmieni2ony fo2oter :)",
-    "file": "index.html"
+    "dom": "#wrapper",
+    "content": "<h1>SIEMA BYCZKU IKSDE</h1>",
+    "file": "public\\sites\\index.html"
 }
 
 ###
-#Deletes html file to public/sites then from db
+#Deletes html file from public/sites then from db
 ###
-GET http://localhost:8080/api/sites/12  /delete HTTP/1.1
+GET http://localhost:8080/api/sites/1/delete HTTP/1.1
 content-type: application/json
 
+###
+#Gets all html 
+###
+GET http://localhost:8080/api/sites HTTP/1.1
+content-type: application/json
+
+###############
+#### POSTS ####
+###############
+
+###
+#Gets all posts
+###
+GET http://localhost:8080/api/posts HTTP/1.1
+content-type: application/json
+
+###
+#Gets all posts within one siteId
+###
+GET http://localhost:8080/api/posts/5 HTTP/1.1
+content-type: application/json
+
+###
+#Gets all posts to dashboard
+###
+GET http://localhost:8080/api/postsdashboard HTTP/1.1
+content-type: application/json
+
+###
+#Adds post
+###
+POST http://localhost:8080/api/posts/add HTTP/1.1
+content-type: application/json
+
+{
+    "siteId": 8,
+    "userId": 1,
+    "title": "Nowy post",
+    "subtitle": "Testowy taki",
+    "content": "delma sola pyszniejsza jest :)"
+}
+
+###
+#Deletes post
+###
+GET http://localhost:8080/api/posts/3/delete HTTP/1.1
+content-type: application/json
+
+###
+#Edits posts
+###
+POST http://localhost:8080/api/posts/edit HTTP/1.1
+content-type: application/json
+
+{
+    "id": 4,
+    "title": "Post",
+    "subtitle": "Testowy taki",
+    "content": "delma sola pyszniejsza jest :)"
+}
+
+###
+#Gets one post
+###
+GET http://localhost:8080/api/posts/6/post HTTP/1.1
+content-type: application/json
+
+
+##################
+#### COMMENTS ####
+##################
+
+###
+#Gets all comments
+###
+GET http://localhost:8080/api/comments HTTP/1.1
+content-type: application/json
+
+###
+#Gets all comments within one pageId
+###
+GET http://localhost:8080/api/comments/5 HTTP/1.1
+content-type: application/json
+
+###
+#Gets all comments within one postId
+###
+GET http://localhost:8080/api/comments/posts/6 HTTP/1.1
+content-type: application/json
+
+###
+#Adds comment
+###
+POST http://localhost:8080/api/comments/add HTTP/1.1
+content-type: application/json
+
+{
+    "postId": 6,
+    "nickname": "Byczek12",
+    "title": "Nowy komentarz",
+    "content": "delma sola pyszniejsza jest :)"
+}
+
+###
+#Deletes comment
+###
+GET http://localhost:8080/api/comments/4/delete HTTP/1.1
+content-type: application/json
+
+###
+#Edits comment
+###
+POST http://localhost:8080/api/comments/edit HTTP/1.1
+content-type: application/json
+
+{
+    "id": 5,
+    "title": "Edytowany komentarz",
+    "content": "delma sola pyszniejsza jest (:)"
+}
+
+###
+#Get single comment
+###
+GET http://localhost:8080/api/comments/10/comment HTTP/1.1
+content-type: application/json

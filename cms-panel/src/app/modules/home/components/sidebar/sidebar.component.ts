@@ -1,11 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { faChartBar, faPaperclip, faAngleLeft, faPlusSquare, faNewspaper, faComment, faUser, faPalette, faCog, faFlag } from '@fortawesome/free-solid-svg-icons';
-
+import {
+  faChartBar,
+  faPaperclip,
+  faAngleLeft,
+  faPlusSquare,
+  faNewspaper,
+  faComment,
+  faUser,
+  faPalette,
+  faCog,
+  faFlag,
+  faBars,
+  faHeading,
+  faShoePrints,
+  faCompass,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent implements OnInit {
   faChart = faChartBar;
@@ -18,22 +32,31 @@ export class SidebarComponent implements OnInit {
   faPallete = faPalette;
   faCog = faCog;
   faFlag = faFlag;
+  faAdn = faBars;
+  faHeading = faHeading;
+  faShoes = faShoePrints;
+  faCompass = faCompass;
   isPagesClicked = false;
   isPostsClicked = false;
+  isContentClicked = false;
+  isCommentsClicked = false;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-  }
-
-  togglePages(){
+  togglePages() {
     this.isPagesClicked = !this.isPagesClicked;
   }
 
-  togglePosts(){
+  togglePosts() {
     this.isPostsClicked = !this.isPostsClicked;
   }
 
+  toggleComments() {
+    this.isCommentsClicked = !this.isCommentsClicked;
+  }
 
-
+  toggleContent() {
+    this.isContentClicked = !this.isContentClicked;
+  }
 }

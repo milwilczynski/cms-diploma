@@ -1,29 +1,65 @@
-<div class="w-100 justify-content-center">
-  <div class="table-wrapper mt-2 d-flex justify-content-center">
-    <table class="table table-light table-width table-hover table-striped">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Main Editor</th>
-          <th scope="col">Page Name</th>
-          <th scope="col">Page Url</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of site">
-          <td>{{item.id}}</td>
-          <td>{{item.roleId}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.url}}</td>
-          <td>
-            <fa-icon data-toggle="tooltip" data-placement="top" title="Show HTML View" (click)="setUrl(item.id);" [icon]="faEye" class="mr-2"></fa-icon>
-            <fa-icon data-toggle="tooltip" data-placement="top" title="Edit HTML Params" [icon]="faPen" class="mr-2"></fa-icon>
-            <fa-icon data-toggle="tooltip" data-placement="top" title="Delete HTML Page" (click)="deletePage(item.id)" [icon]="faTrashAlt"></fa-icon>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<div class="bg-white m-3 justify-self-center set-div mt-3 pr-3 pl-3">
+  <div class="w-100 justify-content-center">
+    <div class="table-wrapper mt-2 d-flex justify-content-center">
+      <table
+        class="table table-light table-width table-hover table-striped fs-14"
+      >
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Main Editor</th>
+            <th scope="col">Page Title</th>
+            <th scope="col">Page Name</th>
+            <th scope="col">Page Url</th>
+            <th scope="col">In Menu</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of site">
+            <td>{{ item.roleId }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.url }}</td>
+            <td *ngIf="item.inNav == false">
+              <fa-icon [icon]="faTimes"></fa-icon>
+            </td>
+            <td *ngIf="item.inNav == true">
+              <fa-icon [icon]="faCheck"></fa-icon>
+            </td>
+            <td>
+              <fa-icon
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Show HTML View"
+                (click)="setUrl(item.url)"
+                [icon]="faEye"
+                class="mr-2"
+              ></fa-icon>
+              <fa-icon
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Edit Body of HTML"
+                [icon]="faPen"
+                class="mr-2"
+                [routerLink]="['/sites/domeditor/', item.url, '#wrapper']"
+              ></fa-icon>
+
+              <fa-icon
+                data-toggle="tooltip"
+                data-placement="top"
+                title="Delete HTML Page"
+                (click)="deletePage(item.id)"
+                [icon]="faTrashAlt"
+              ></fa-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
-
-<app-html-viewer [id]='variable' (isOnShow)="toggleViewer($event)" *ngIf="isOnShow"></app-html-viewer>
+<app-html-viewer
+  [id]="fileUrl"
+  (isOnShow)="toggleViewer($event)"
+  *ngIf="isOnShow"
+></app-html-viewer>
