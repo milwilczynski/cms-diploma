@@ -41,4 +41,8 @@ export class CommentsService {
   editComment(body: any) {
     return this.http.post(this.url + '/edit', body);
   }
+
+  getDashboard() {
+    return this.http.get(this.url + '/dashboard/comment');
+  }
 }

@@ -4,7 +4,7 @@ import {
   faPaperclip,
   faAngleLeft,
   faPlusSquare,
-  faNewspaper,
+  faBookOpen,
   faComment,
   faUser,
   faPalette,
@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
   faFile = faPaperclip;
   faAngle = faAngleLeft;
   faPlusSqure = faPlusSquare;
-  faNewsPaper = faNewspaper;
+  faNewsPaper = faBookOpen;
   faComment = faComment;
   faUser = faUser;
   faPallete = faPalette;

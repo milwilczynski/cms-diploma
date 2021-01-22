@@ -67,4 +67,12 @@ export class SiteService {
       file: fileUrl,
     });
   }
+
+  getDashboardInfo() {
+    return this.http.get(this.url + '/main');
+  }
+
+  toggleNavigation(id: number) {
+    return this.http.get(this.url + '/' + id + '/navigation');
+  }
 }

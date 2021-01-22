@@ -29,8 +29,8 @@ POST http://localhost:8080/api/user/auth HTTP/1.1
 content-type: application/json
 
 {
-    "emailorlogin": "te1st",
-    "password": "test"
+    "emailorlogin": "admin",
+    "password": "admin"
 }
 
 ##############
@@ -72,6 +72,18 @@ content-type: application/json
 GET http://localhost:8080/api/sites HTTP/1.1
 content-type: application/json
 
+###
+#Gets main html
+###
+GET http://localhost:8080/api/sites/main HTTP/1.1
+content-type: application/json
+
+###
+#Change site to be in navbar
+###
+GET http://localhost:8080/api/sites/5/navigation HTTP/1.1
+content-type: application/json
+
 ###############
 #### POSTS ####
 ###############
@@ -111,7 +123,7 @@ content-type: application/json
 ###
 #Deletes post
 ###
-GET http://localhost:8080/api/posts/3/delete HTTP/1.1
+GET http://localhost:8080/api/posts/4/delete HTTP/1.1
 content-type: application/json
 
 ###
@@ -133,6 +145,17 @@ content-type: application/json
 GET http://localhost:8080/api/posts/6/post HTTP/1.1
 content-type: application/json
 
+###
+#Gets dashboard
+###
+GET http://localhost:8080/api/posts/dashboard/post HTTP/1.1
+content-type: application/json
+
+###
+#Counts posts
+###
+GET http://localhost:8080/api/posts/dashboard/count HTTP/1.1
+content-type: application/json
 
 ##################
 #### COMMENTS ####
@@ -188,7 +211,13 @@ content-type: application/json
 }
 
 ###
-#Get single comment
+#Gets single comment
 ###
 GET http://localhost:8080/api/comments/10/comment HTTP/1.1
+content-type: application/json
+
+###
+#Gets dashboard
+###
+GET http://localhost:8080/api/comments/dashboard/comment HTTP/1.1
 content-type: application/json

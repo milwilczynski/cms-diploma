@@ -138,9 +138,74 @@ function create(context) {
     }
   }
 
+  async function changeNavigation(id) {
+    try {
+      const site = await models.site.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (site == null) {
+        throw applicationException.new(
+          applicationException.NOT_FOUND,
+          'Page not found',
+        );
+      }
+      await site.update({
+        inNav: !site.inNav,
+      });
+      return applicationMessage.new(
+        applicationMessage.OK,
+        'Page has been edited',
+      );
+    } catch (error) {
+      return error;
+    }
+  }
+
   async function getAllSites() {
     try {
-      return models.site.findAll();
+      return models.site.findAll({
+        order: [['inNav', 'DESC']],
+      });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function getMainPage() {
+    try {
+      return models.site.findOne({
+        where: {
+          name: 'index.html',
+        },
+        include: [
+          {
+            model: models.post,
+            attributes: ['title', 'createdAt', 'updatedAt'],
+            order: [['updatedAt', 'DESC']],
+            limit: 1,
+            include: [
+              {
+                model: models.user,
+                attributes: ['login'],
+              },
+              {
+                model: models.comment,
+                order: [['updatedAt', 'DESC']],
+                limit: 1,
+                attributes: [
+                  'nickname',
+                  'title',
+                  'createdAt',
+                  'updatedAt',
+                ],
+              },
+            ],
+          },
+        ],
+        attributes: ['title', 'url', 'createdAt', 'updatedAt'],
+      });
     } catch (error) {
       return error;
     }
@@ -149,6 +214,8 @@ function create(context) {
   return {
     updateHtmlContent,
     getHtmlContent,
+    getMainPage,
+    changeNavigation,
     addSite,
     deleteSite,
     getAllSites,

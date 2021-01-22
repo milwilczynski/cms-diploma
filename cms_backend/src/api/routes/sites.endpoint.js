@@ -67,7 +67,6 @@ const sitesEndpoint = (router) => {
     '/api/sites/:id/delete',
     async (request, response, next) => {
       try {
-        console.log(request);
         const result = await business()
           .getSiteManager()
           .deleteSite(request.params.id);
@@ -83,6 +82,26 @@ const sitesEndpoint = (router) => {
     const result = await business().getSiteManager().getAllSites();
     response.status(200).send(result);
   });
+
+  router.get('/api/sites/main', async (request, response, next) => {
+    const result = await business().getSiteManager().getMainPage();
+    response.status(200).send(result);
+  });
+
+  router.get(
+    '/api/sites/:id/navigation',
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getSiteManager()
+          .changeNavigation(request.params.id);
+        response.status(200).send(result);
+        //applicationMessage.statusHandler(result, response);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
 };
 
 export default sitesEndpoint;

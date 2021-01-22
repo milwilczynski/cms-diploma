@@ -5,10 +5,18 @@ import {
   faPen,
   faTrashAlt,
   faEye,
-  faPlusSquare,
   faCheck,
   faTimes,
+  faHome,
+  faFileAlt,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  faFile,
+  faUser,
+  faClock,
+  faPlusSquare,
+} from '@fortawesome/free-regular-svg-icons';
 @Component({
   selector: 'app-sites-dashboard',
   templateUrl: './sites-dashboard.component.html',
@@ -18,16 +26,22 @@ export class SitesDashboardComponent implements OnInit {
   public site: any;
   isOnShow = false;
   fileUrl: string = '';
+  dashboard!: any;
   faPen = faPen;
+  faHome = faHome;
   faTrashAlt = faTrashAlt;
   faEye = faEye;
-  faPlus = faPlusSquare;
+  faPlus = faPlus;
   faCheck = faCheck;
   faTimes = faTimes;
+  faFile = faFile;
+  faUser = faUser;
+  faClock = faClock;
 
   constructor(private siteService: SiteService) {}
 
   ngOnInit(): void {
+    this.fetchDashboard();
     this.fetchSites();
   }
 
@@ -50,5 +64,26 @@ export class SitesDashboardComponent implements OnInit {
     if (this.fileUrl != '') {
       this.toggleViewer(true);
     }
+  }
+
+  fetchDashboard() {
+    this.siteService.getDashboardInfo().subscribe((response) => {
+      this.dashboard = response;
+      console.log(this.dashboard);
+    });
+  }
+
+  splitter(date: string) {
+    let dateString: string;
+    let data = date.split('T');
+    dateString =
+      data[1].split(':')[0] + ':' + data[1].split(':')[1] + ', ' + data[0];
+    return dateString;
+  }
+
+  toggleNavigation(id: any) {
+    this.siteService.toggleNavigation(id).subscribe((response) => {
+      console.log(response);
+    });
   }
 }

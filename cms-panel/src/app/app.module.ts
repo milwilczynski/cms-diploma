@@ -27,8 +27,6 @@ import { ShowPostsComponent } from './posts/show-posts/show-posts.component';
 import { PostEditorComponent } from './posts/post-editor/post-editor.component';
 import { EditCommentComponent } from './modules/comments/edit-comment/edit-comment.component';
 import { CommentsDashboardComponent } from './modules/comments/comments-dashboard/comments-dashboard.component';
-import { CommentsBySiteComponent } from './modules/comments/comments-by-site/comments-by-site.component';
-import { CommentsByPostsComponent } from './modules/comments/comments-by-posts/comments-by-posts.component';
 import { ShowCommentsComponent } from './modules/comments/show-comments/show-comments.component';
 
 @NgModule({
@@ -54,8 +52,6 @@ import { ShowCommentsComponent } from './modules/comments/show-comments/show-com
     PostEditorComponent,
     EditCommentComponent,
     CommentsDashboardComponent,
-    CommentsBySiteComponent,
-    CommentsByPostsComponent,
     ShowCommentsComponent,
   ],
   imports: [

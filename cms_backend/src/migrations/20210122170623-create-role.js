@@ -1,29 +1,19 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('sites', {
+    await queryInterface.createTable('roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      roleId: {
-        type: Sequelize.INTEGER,
-      },
-      title: {
-        type: Sequelize.STRING,
-        unique: true,
-      },
       name: {
         type: Sequelize.STRING,
-      },
-      url: {
-        type: Sequelize.STRING,
         unique: true,
       },
-      inNav: {
-        type: Sequelize.BOOLEAN,
+      description: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -33,10 +23,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      onDelete: 'CASCADE',
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('sites');
+    await queryInterface.dropTable('roles');
   },
 };

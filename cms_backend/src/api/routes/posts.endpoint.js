@@ -24,6 +24,34 @@ const postsEndpoint = (router) => {
   });
 
   router.get(
+    '/api/posts/dashboard/post',
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getPostManager()
+          .getDashboard();
+        response.status(200).send(result);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
+
+  router.get(
+    '/api/posts/dashboard/count',
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getPostManager()
+          .getPostsAmount();
+        response.status(200).send(result);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
+
+  router.get(
     '/api/posts/:id/post',
     async (request, response, next) => {
       try {
@@ -55,7 +83,7 @@ const postsEndpoint = (router) => {
         const result = await business()
           .getPostManager()
           .deletePost(request.params.id);
-        applicationMessage.statusHandler(result, response);
+        response.status(200).send(result);
       } catch (error) {
         applicationException.errorHandler(error, response);
       }

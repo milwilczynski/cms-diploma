@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 export interface Post {
   id: number;
@@ -49,6 +50,10 @@ export class PostsService {
 
   fetchPost(id: number) {
     return this.http.get<Post>(this.url + '/' + id + '/post');
+  }
+
+  getDashboard() {
+    return this.http.get(this.url + '/dashboard/post');
   }
 
   editPost(body: any) {

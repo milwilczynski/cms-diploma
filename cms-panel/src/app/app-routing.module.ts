@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CommentsByPostsComponent } from './modules/comments/comments-by-posts/comments-by-posts.component';
-import { CommentsBySiteComponent } from './modules/comments/comments-by-site/comments-by-site.component';
 import { CommentsDashboardComponent } from './modules/comments/comments-dashboard/comments-dashboard.component';
 import { EditCommentComponent } from './modules/comments/edit-comment/edit-comment.component';
 import { ShowCommentsComponent } from './modules/comments/show-comments/show-comments.component';
@@ -47,32 +45,12 @@ const routes: Routes = [
         component: AddpostComponent,
       },
       {
-        path: 'posts/postsbysite',
-        component: PostsbysiteComponent,
-      },
-      {
-        path: 'posts/postsbysite/:id',
-        component: ShowPostsComponent,
-      },
-      {
         path: 'posts/:id',
         component: PostEditorComponent,
       },
       {
         path: 'comments',
         component: CommentsDashboardComponent,
-      },
-      {
-        path: 'comments/bysite',
-        component: CommentsBySiteComponent,
-      },
-      {
-        path: 'comments/byposts',
-        component: CommentsByPostsComponent,
-      },
-      {
-        path: 'comments/bysiteorpage/:id/:type',
-        component: ShowCommentsComponent,
       },
       {
         path: 'comments/edit/:id',

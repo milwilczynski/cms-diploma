@@ -1,12 +1,19 @@
-.bb-none{
+.bb-none {
   border-width: 0px 0px 2px 0px;
 }
 .arrow-pages {
   transition: all 0.25s ease-out !important;
 }
 .clicked {
-  transform: rotate(-90deg)
+  transform: rotate(-90deg);
 }
-fa-icon{
+fa-icon {
   font-size: 16px;
+}
+.active-link {
+  background-color: #0062cc !important;
+  color: #fff !important;
+}
+.list-group-item {
+  border: 0px;
 }

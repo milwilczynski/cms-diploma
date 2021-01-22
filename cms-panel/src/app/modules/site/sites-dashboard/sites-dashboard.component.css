@@ -1,20 +1,22 @@
 .table-width {
-  width: 75% !important;
+  width: 100% !important;
+  margin-right: 2vh;
   border-top-width: 0px;
 }
 
-fa-icon {
+.hover-fa {
   cursor: pointer;
   padding: 10px;
   transition-duration: 1s;
 }
 
-fa-icon:focus {
+.hover-fa:focus {
   outline: 0;
 }
 
-fa-icon:hover {
-  background-color: teal;
+.hover-fa:hover {
+  background-color: #007bff;
+  border-radius: 5px;
   color: white;
 }
 .set-div {
@@ -23,4 +25,12 @@ fa-icon:hover {
   padding-bottom: 5vh;
   margin: 0 auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.no-hover:hover {
+  background-color: salmon;
+}
+
+table {
+  border-radius: 5px;
 }

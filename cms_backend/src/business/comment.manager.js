@@ -118,6 +118,35 @@ function create(context) {
     }
   }
 
+  async function getDashboard() {
+    try {
+      let comments = await models.comment.findOne({
+        order: [['updatedAt', 'DESC']],
+        include: [
+          {
+            model: models.post,
+            attributes: ['id', 'title'],
+          },
+        ],
+        attributes: {
+          exclude: ['postId'],
+        },
+      });
+
+      let amount = await models.comment.count();
+
+      if (comments == null || comments.length == 0) {
+        return applicationException.new(
+          applicationException.NOT_FOUND,
+          'No comments found',
+        );
+      }
+      return { comment: comments, amount: amount };
+    } catch (error) {
+      return error;
+    }
+  }
+
   async function addComment(request) {
     const transaction = await sequelize.transaction();
     try {
@@ -198,6 +227,7 @@ function create(context) {
     getAllComments,
     getCommentsFromPage,
     getCommentsFromPost,
+    getDashboard,
     getComment,
     addComment,
     deleteComment,

@@ -230,10 +230,58 @@ function create(context) {
     }
   }
 
+  async function getDashboard() {
+    try {
+      let posts = await models.post.findOne({
+        order: [['updatedAt', 'DESC']],
+        limit: 1,
+        include: [
+          {
+            model: models.user,
+            attributes: ['login', 'id'],
+          },
+          {
+            model: models.comment,
+            attributes: ['title', 'id', 'nickname'],
+            order: [['updatedAt', 'DESC']],
+            limit: 1,
+          },
+        ],
+        attributes: {
+          exclude: ['siteId'],
+        },
+      });
+
+      let amount = await models.post.count();
+
+      if (posts == null || posts.length == 0) {
+        return applicationException.new(
+          applicationException.NOT_FOUND,
+          'No post found',
+        );
+      }
+
+      return { post: posts, amount: amount };
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function getPostsAmount() {
+    try {
+      let posts = await models.post.count();
+      return { amount: posts };
+    } catch (error) {
+      return error;
+    }
+  }
+
   return {
     getAllPosts,
     getPostsFromSite,
     getNewestPostFromEverySite,
+    getDashboard,
+    getPostsAmount,
     getPost,
     addPost,
     deletePost,
