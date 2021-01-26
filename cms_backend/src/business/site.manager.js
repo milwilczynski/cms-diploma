@@ -4,6 +4,7 @@ import models, { sequelize } from '../models/index';
 import { ValidationError, Op } from 'sequelize';
 import applicationMessage from '../resources/applicationMessage';
 import applicationException from '../exceptions/applicationException';
+import { response } from 'express';
 
 function create(context) {
   /**
@@ -122,17 +123,15 @@ function create(context) {
           'Page not found',
         );
       }
-      const data = await utility()
-        .getFileUtility()
-        .deleteHtml(site.url);
-      await site.destroy();
-      if (data.error) {
-        return data;
+      if (await site.destroy()) {
+        const data = await utility()
+          .getFileUtility()
+          .deleteHtml(site.url);
+        if (!data) {
+          return data;
+        }
       }
-      return applicationMessage.new(
-        applicationMessage.OK,
-        'Page has been deleted',
-      );
+      return 'Page has been deleted';
     } catch (error) {
       return error;
     }
@@ -175,7 +174,7 @@ function create(context) {
 
   async function getMainPage() {
     try {
-      return models.site.findOne({
+      const site = await models.site.findOne({
         where: {
           name: 'index.html',
         },
@@ -206,6 +205,8 @@ function create(context) {
         ],
         attributes: ['title', 'url', 'createdAt', 'updatedAt'],
       });
+      const amount = await models.site.count();
+      return { site: site, amount: amount };
     } catch (error) {
       return error;
     }

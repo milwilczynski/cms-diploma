@@ -47,7 +47,7 @@ export class SiteService {
 
   deleteSite(id: number) {
     return this.http
-      .get(this.url + '/' + id + '/delete')
+      .delete(this.url + '/' + id + '/delete')
       .subscribe((response) => {
         console.log(response);
       });

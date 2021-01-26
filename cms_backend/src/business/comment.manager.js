@@ -20,12 +20,6 @@ function create(context) {
         },
         order: [['createdAt', 'DESC']],
       });
-      if (comments == null || comments.length == 0) {
-        return applicationException.new(
-          applicationException.NOT_FOUND,
-          'No comments found',
-        );
-      }
       return comments;
     } catch (error) {
       return error;
@@ -135,12 +129,6 @@ function create(context) {
 
       let amount = await models.comment.count();
 
-      if (comments == null || comments.length == 0) {
-        return applicationException.new(
-          applicationException.NOT_FOUND,
-          'No comments found',
-        );
-      }
       return { comment: comments, amount: amount };
     } catch (error) {
       return error;

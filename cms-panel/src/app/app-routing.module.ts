@@ -6,19 +6,26 @@ import { ShowCommentsComponent } from './modules/comments/show-comments/show-com
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LoginComponent } from './modules/login/login.component';
+import { RoleAdderComponent } from './modules/roles/role-adder/role-adder.component';
+import { RoleDashboardComponent } from './modules/roles/role-dashboard/role-dashboard.component';
+import { RoleEditorComponent } from './modules/roles/role-editor/role-editor.component';
 import { DomEditorComponent } from './modules/site/dom-editor/dom-editor.component';
 import { SiteAdderComponent } from './modules/site/site-adder/site-adder.component';
 import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-dashboard.component';
 import { AddpostComponent } from './posts/addpost/addpost.component';
 import { PostEditorComponent } from './posts/post-editor/post-editor.component';
 import { PostdashboardComponent } from './posts/postdashboard/postdashboard.component';
-import { PostsbysiteComponent } from './posts/postsbysite/postsbysite.component';
-import { ShowPostsComponent } from './posts/show-posts/show-posts.component';
+import { AuthGuard } from './services/auth/auth.guard';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -56,11 +63,19 @@ const routes: Routes = [
         path: 'comments/edit/:id',
         component: EditCommentComponent,
       },
+      {
+        path: 'roles',
+        component: RoleDashboardComponent,
+      },
+      {
+        path: 'roles/add',
+        component: RoleAdderComponent,
+      },
+      {
+        path: 'roles/:id',
+        component: RoleEditorComponent,
+      },
     ],
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
   },
 ];
 

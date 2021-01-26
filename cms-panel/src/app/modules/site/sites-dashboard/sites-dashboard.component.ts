@@ -16,6 +16,7 @@ import {
   faUser,
   faClock,
   faPlusSquare,
+  faEyeSlash,
 } from '@fortawesome/free-regular-svg-icons';
 @Component({
   selector: 'app-sites-dashboard',
@@ -23,10 +24,10 @@ import {
   styleUrls: ['./sites-dashboard.component.css'],
 })
 export class SitesDashboardComponent implements OnInit {
-  public site: any;
+  site: any = null;
   isOnShow = false;
   fileUrl: string = '';
-  dashboard!: any;
+  dashboard: any = null;
   faPen = faPen;
   faHome = faHome;
   faTrashAlt = faTrashAlt;
@@ -37,6 +38,7 @@ export class SitesDashboardComponent implements OnInit {
   faFile = faFile;
   faUser = faUser;
   faClock = faClock;
+  faEyeSlash = faEyeSlash;
 
   constructor(private siteService: SiteService) {}
 
@@ -69,7 +71,6 @@ export class SitesDashboardComponent implements OnInit {
   fetchDashboard() {
     this.siteService.getDashboardInfo().subscribe((response) => {
       this.dashboard = response;
-      console.log(this.dashboard);
     });
   }
 

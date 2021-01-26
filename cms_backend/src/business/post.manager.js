@@ -208,21 +208,22 @@ function create(context) {
           applicationException.NOT_FOUND,
           'No posts found',
         );
-      }
-      var sitesId = [];
+      } else {
+        var sitesId = [];
 
-      posts.forEach(function (entry) {
-        sitesId.push(entry.siteId);
-      });
-      var i = 0;
-      var tempArray = [];
-      tempArray.push(await posts[0]);
-      posts.forEach(function (entry) {
-        i++;
-        if (sitesId[i] != sitesId[i + 1]) {
-          if (sitesId[i + 1] != null) tempArray.push(posts[i + 1]);
-        }
-      });
+        posts.forEach(function (entry) {
+          sitesId.push(entry.siteId);
+        });
+        var i = 0;
+        var tempArray = [];
+        tempArray.push(await posts[0]);
+        posts.forEach(function (entry) {
+          i++;
+          if (sitesId[i] != sitesId[i + 1]) {
+            if (sitesId[i + 1] != null) tempArray.push(posts[i + 1]);
+          }
+        });
+      }
 
       return tempArray;
     } catch (error) {
@@ -253,13 +254,6 @@ function create(context) {
       });
 
       let amount = await models.post.count();
-
-      if (posts == null || posts.length == 0) {
-        return applicationException.new(
-          applicationException.NOT_FOUND,
-          'No post found',
-        );
-      }
 
       return { post: posts, amount: amount };
     } catch (error) {

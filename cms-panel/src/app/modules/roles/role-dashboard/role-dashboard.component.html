@@ -1,0 +1,127 @@
+<div *ngIf="dashboard">
+  <div
+    class="bg-white fs-14 m-3 justify-self-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
+  >
+    <div class="d-flex flex-row w-100 p-2">
+      <div
+        *ngIf="dashboard"
+        class="d-flex flex-row w-25 mr-5 card bg-primary justify-content-center text-white p-2"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faStar"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">main role is</div>
+          <div class="font-weight-bold fs-24">admin</div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-warning"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faCircleNotch"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">you have</div>
+          <div class="font-weight-bold fs-24">
+            {{ dashboard.amount }} {{ dashboard.amount > 1 ? "Roles" : "Role" }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2"
+        style="background-color: salmon"
+      >
+        <div class="d-flex justify-content-end w-50">
+          <fa-icon class="fa-5x p-2" [icon]="faUserTag"></fa-icon>
+        </div>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">last created role</div>
+          <div class="font-weight-bold fs-24">{{ dashboard.roles.name }}</div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-success"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faClock"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">created at</div>
+          <div class="font-weight-bold fs-24">
+            {{ _utils.splitter(dashboard.roles.createdAt) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white m-3 justify-self-center set-div mt-3">
+    <div class="d-flex justify-content-center">
+      <div style="width: 85%">
+        <div class="w-100 justify-content-start">
+          <div class="table-wrapper mt-2 d-flex justify-content-start">
+            <table
+              class="table table-light table-width table-hover table-striped fs-14"
+            >
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Role Name</th>
+                  <th scope="col">Role Description</th>
+                  <th scope="col">Created At</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of roles">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.description }}</td>
+                  <td>{{ _utils.splitter(item.createdAt) }}</td>
+                  <td>
+                    <fa-icon
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Edit Body of HTML"
+                      [icon]="faPen"
+                      class="mr-2 hover-fa"
+                      routerLink="/roles/{{ item.id }}"
+                    ></fa-icon>
+
+                    <fa-icon
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      class="hover-fa"
+                      title="Delete HTML Page"
+                      [icon]="faTrashAlt"
+                      (click)="deleteRole(item.id)"
+                    ></fa-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="bg-white fs-14 m-3 d-flex justify-content-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
+  *ngIf="!dashboard"
+>
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-center">
+      <fa-icon class="fa-10x text-warning" [icon]="faEyeSlash"></fa-icon>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+      <h2 class="font-weight-bold">There is no sites to load</h2>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div
+    class="justify-content-end mt-2 mr-3"
+    style="position: absolute; bottom: 30px; right: 10px"
+  >
+    <div routerLink="/roles/add" class="btn bg-success text-white">
+      <fa-icon [icon]="faPlus" class="fs-24 pl-2 pr-2 pt-4 pb-4"></fa-icon>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,9 @@ const commentsEndpoint = (router) => {
       const result = await business()
         .getCommentManager()
         .getAllComments();
-      response.status(200).send(result);
+      result.length > 0
+        ? response.status(200).send(result)
+        : response.status(204).send();
     } catch (error) {
       applicationException.errorHandler(error, response);
     }
@@ -21,7 +23,9 @@ const commentsEndpoint = (router) => {
         const result = await business()
           .getCommentManager()
           .getDashboard();
-        response.status(200).send(result);
+        result.comment != null
+          ? response.status(200).send(result)
+          : response.status(204).send();
       } catch (error) {
         applicationException.errorHandler(error, response);
       }
@@ -99,7 +103,7 @@ const commentsEndpoint = (router) => {
         const result = await business()
           .getCommentManager()
           .deleteComment(request.params.id);
-        applicationMessage.statusHandler(result, response);
+        return response.status(200).send('Page has been deleted');
       } catch (error) {
         applicationException.errorHandler(error, response);
       }

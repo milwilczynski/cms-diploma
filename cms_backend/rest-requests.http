@@ -1,11 +1,12 @@
 ##############
 #### USER ####
 ##############
-
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibG9naW4iOiJqZG9lIiwibmFtZSI6IkpvaG4iLCJzdXJuYW1lIjoiRG9lIiwiaWF0IjoxNjExMzUyNTY0fQ.UGfdmkF8CpwTUSQFKbShjbn88lAicq63LPdMhq2rqTQ
 ###
 #Shows all users in db
 ###
 GET http://localhost:8080/api/user
+X-Auth-Token: {{authToken}}
 
 ###
 #Creates User
@@ -29,9 +30,57 @@ POST http://localhost:8080/api/user/auth HTTP/1.1
 content-type: application/json
 
 {
-    "emailorlogin": "admin",
+    "emailorlogin": "jdoe",
     "password": "admin"
 }
+
+##############
+#### ROLES ###
+##############
+
+###
+#Shows all roles in db
+###
+GET http://localhost:8080/api/roles
+
+###
+#Gets one role by id from db
+###
+GET http://localhost:8080/api/roles/1
+
+###
+#Gets roles dashboard
+###
+GET http://localhost:8080/api/roles-dashboard
+
+###
+#Adds new role into db
+###
+PUT http://localhost:8080/api/roles
+content-type: application/json
+
+{
+    "name": "Posterrr",
+    "description": "Post manager can edit any post and comment within db"
+}
+
+###
+#Updates selected role in db
+###
+POST http://localhost:8080/api/roles/update
+content-type: application/json
+
+{
+    "id": 19,
+    "name": "Posterrrr",
+    "description": "Post manager can edit any post and comment within db"
+}
+
+###
+#Deletes a role by id from db
+###
+DELETE http://localhost:8080/api/roles/10
+
 
 ##############
 #### HTML ####
@@ -63,13 +112,14 @@ content-type: application/json
 ###
 #Deletes html file from public/sites then from db
 ###
-GET http://localhost:8080/api/sites/1/delete HTTP/1.1
+DELETE http://localhost:8080/api/sites/5/delete HTTP/1.1
 content-type: application/json
 
 ###
 #Gets all html 
 ###
 GET http://localhost:8080/api/sites HTTP/1.1
+X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjExMzQwNTQ1fQ.Jo2YiZvoo7fTljftLE9kjDZlTdyUXuJ0u3EXyml_u28
 content-type: application/json
 
 ###

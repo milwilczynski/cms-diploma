@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           name: 'siteId',
           allowNull: false,
-          onDelete: 'cascade',
         },
+        onDelete: 'cascade',
       });
     }
   }

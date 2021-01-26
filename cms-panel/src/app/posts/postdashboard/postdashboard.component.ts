@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import {
   faClipboard,
   faClock,
+  faEyeSlash,
   faUser,
 } from '@fortawesome/free-regular-svg-icons';
 import {
@@ -21,9 +23,9 @@ import { SiteService } from 'src/app/services/site/site.service';
 })
 export class PostdashboardComponent implements OnInit {
   posts!: any[];
-  sites!: any;
-  dashboard!: any;
-  selectedPage!: number;
+  sites: any;
+  dashboard: any = null;
+  selectedPage: number = 0;
   faPosts = faClipboard;
   faHeading = faHeading;
   faUser = faUser;
@@ -31,6 +33,7 @@ export class PostdashboardComponent implements OnInit {
   faPen = faPen;
   faTrashAlt = faTrashAlt;
   faPlus = faPlus;
+  faEyeSlash = faEyeSlash;
 
   constructor(
     private postsService: PostsService,
@@ -72,6 +75,10 @@ export class PostdashboardComponent implements OnInit {
   fetchSites(): void {
     this.siteService.getAllSites().subscribe((response) => {
       this.sites = response;
+      this.sites.unshift({
+        id: 0,
+        title: 'Any',
+      });
     });
   }
 

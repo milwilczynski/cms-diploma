@@ -24,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: {
           name: 'postId',
           allowNull: false,
-          onDelete: 'CASCADE',
           hooks: true,
         },
+        onDelete: 'cascade',
       });
     }
   }

@@ -75,10 +75,7 @@ function create(context) {
   function deleteHtml(path) {
     try {
       fs.unlinkSync(path);
-      return applicationMessage.new(
-        applicationMessage.OK,
-        'File has been deleted',
-      );
+      return true;
     } catch (error) {
       if ((error.code = 'ENOENT')) {
         throw applicationException.new(

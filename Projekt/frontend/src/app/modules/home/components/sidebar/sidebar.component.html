@@ -1,0 +1,136 @@
+<div class="text-white" id="sidebar-wrapper">
+  <div
+    class="sidebar-heading border-bottom-2 color d-flex flex-row justify-content-center bg-primary"
+    style="border-bottom: 1px solid white"
+  >
+    <div
+      class="d-flex bg-primary font-weight-bold"
+      style="border: 3px solid white"
+    >
+      <div class="bg-white m-1 pl-2 pr-2 w-50">
+        <span class="text-primary fs-24">EDIT</span>
+      </div>
+      <div class="w-50 fs-24 m-1 ml-1">CMS</div>
+    </div>
+  </div>
+  <div class="list-group list-group-flush">
+    <a
+      href="#"
+      routerLink="/dashboard"
+      routerLinkActive="active-link"
+      class="list-group-item list-group-item-action bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faChart" class="pr-1"></fa-icon>Dashboard
+    </a>
+
+    <a
+      href="#"
+      routerLink="/sites"
+      routerLinkActive="active-link"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faFile" class="mr-1"></fa-icon> Pages
+    </a>
+
+    <a
+      href="#"
+      routerLink="/posts"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLinkActive="active-link"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faNewsPaper" class="fs-14 pr-1"></fa-icon> Posts
+    </a>
+    <a
+      href="#"
+      routerLink="/comments"
+      routerLinkActive="active-link"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faComment" class="pr-1"></fa-icon> Comments
+    </a>
+    <a
+      href="#"
+      routerLinkActive="active-link"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faFlag" class="pr-1"></fa-icon> Roles
+    </a>
+
+    <a
+      href="#"
+      routerLinkActive="active-link"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faUser" class="pr-1"></fa-icon> Users
+    </a>
+
+    <a
+      href="#"
+      (click)="toggleContent()"
+      data-toggle="collapse"
+      routerLinkActive="active-link"
+      href="#collapseContent"
+      aria-expanded="false"
+      aria-controls="collapseContent"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faAdn" class="pr-1"></fa-icon> Content<fa-icon
+        [icon]="faAngle"
+        [ngClass]="{ clicked: isContentClicked }"
+        class="arrow-pages float-right"
+      ></fa-icon>
+    </a>
+    <div class="collapse" id="collapseContent">
+      <a
+        href="#"
+        [routerLink]="[
+          'sites/domeditor/',
+          'public\\sites\\index.html',
+          '#menu'
+        ]"
+        routerLinkActive="active-link"
+        class="pl-4 list-group-item list-group-item-action text-white bb-none bg-primary text-white fs-12"
+        ><fa-icon [icon]="faCompass" class="pr-2"></fa-icon>Menu
+      </a>
+      <a
+        href="#"
+        [routerLink]="[
+          'sites/domeditor/',
+          'public\\sites\\index.html',
+          '#header'
+        ]"
+        routerLinkActive="active-link"
+        class="pl-4 list-group-item list-group-item-action text-white bb-none bg-primary text-white fs-12"
+      >
+        <fa-icon [icon]="faHeading" class="pr-2"></fa-icon>Header
+      </a>
+      <a
+        href="#"
+        [routerLink]="[
+          'sites/domeditor/',
+          'public\\sites\\index.html',
+          '#footer'
+        ]"
+        routerLinkActive="active-link"
+        class="pl-4 list-group-item list-group-item-action text-white bb-none bg-primary text-white fs-12"
+      >
+        <fa-icon [icon]="faShoes" class="pr-2"></fa-icon>Footer
+      </a>
+    </div>
+
+    <a
+      href="#"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faPallete" class="pr-1"></fa-icon> Apperance
+    </a>
+
+    <a
+      href="#"
+      class="list-group-item list-group-item-action text-white bg-primary text-white fs-12"
+    >
+      <fa-icon [icon]="faCog" class="pr-1"></fa-icon> Settings
+    </a>
+  </div>
+</div>

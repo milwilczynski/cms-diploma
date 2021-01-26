@@ -1,22 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-
-export interface Post {
-  id: number;
-  siteId: number;
-  title: string;
-  subtitle: string;
-  content: string;
-  user: {
-    id: number;
-    login: string;
-  };
-  site: {
-    id: number;
-    title: string;
-  };
-}
+import { Dashboard } from './dashboard.interface';
+import { Post } from './post.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +17,7 @@ export class PostsService {
   }
 
   getPostsDashboard() {
-    return this.http.get<Post[]>(this.url + 'dashboard');
+    return this.http.get<Dashboard>(this.url + 'dashboard');
   }
 
   getPostsBySite(id: number) {

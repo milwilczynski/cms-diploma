@@ -3,6 +3,8 @@ import applicationException from '../../exceptions/applicationException';
 import utility from '../../utility/utility.container';
 import multer from 'multer';
 import applicationMessage from '../../resources/applicationMessage';
+import authJwt from '../../middleware/auth';
+
 const sitesEndpoint = (router) => {
   router.post(
     '/api/sites/htmlcontent',
@@ -63,29 +65,46 @@ const sitesEndpoint = (router) => {
     }
   });
 
-  router.get(
+  router.delete(
     '/api/sites/:id/delete',
     async (request, response, next) => {
       try {
         const result = await business()
           .getSiteManager()
           .deleteSite(request.params.id);
-        //response.status(200).send(result);
-        applicationMessage.statusHandler(result, response);
+        response.status(200).send(result);
       } catch (error) {
         applicationException.errorHandler(error, response);
       }
     },
   );
 
-  router.get('/api/sites', async (request, response, next) => {
-    const result = await business().getSiteManager().getAllSites();
-    response.status(200).send(result);
-  });
+  router.get(
+    '/api/sites',
+    authJwt.isAdmin,
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getSiteManager()
+          .getAllSites();
+        result.length > 0
+          ? response.status(200).send(result)
+          : response.status(204).send();
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
 
   router.get('/api/sites/main', async (request, response, next) => {
-    const result = await business().getSiteManager().getMainPage();
-    response.status(200).send(result);
+    try {
+      const result = await business().getSiteManager().getMainPage();
+      result.amount > 0
+        ? response.status(200).send(result)
+        : response.status(204).send();
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
   });
 
   router.get(

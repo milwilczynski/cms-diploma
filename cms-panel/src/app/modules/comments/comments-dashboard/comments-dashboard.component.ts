@@ -5,6 +5,7 @@ import {
   faUser,
 } from '@fortawesome/free-regular-svg-icons';
 import {
+  faCommentSlash,
   faHeading,
   faPen,
   faPlus,
@@ -32,6 +33,7 @@ export class CommentsDashboardComponent implements OnInit {
   faPen = faPen;
   faTrashAlt = faTrashAlt;
   faPlus = faPlus;
+  faCommentSlash = faCommentSlash;
 
   constructor(
     private siteService: SiteService,
@@ -57,9 +59,14 @@ export class CommentsDashboardComponent implements OnInit {
   }
 
   fetchDashboard(): void {
-    this.commentsService.getDashboard().subscribe((response) => {
-      this.dashboard = response;
-    });
+    this.commentsService.getDashboard().subscribe(
+      (response) => {
+        this.dashboard = response;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   fetchPostsByPage(id: number): void {

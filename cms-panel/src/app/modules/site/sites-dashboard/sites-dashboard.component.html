@@ -1,134 +1,152 @@
+<div *ngIf="dashboard">
+  <div
+    class="bg-white fs-14 m-3 justify-self-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
+  >
+    <div class="d-flex flex-row w-100 p-2">
+      <div
+        *ngIf="dashboard"
+        class="d-flex flex-row w-25 mr-5 card bg-primary justify-content-center text-white p-2"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faHome"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">main page is</div>
+          <div class="font-weight-bold fs-24">{{ dashboard.site.title }}</div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-warning"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faFile"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">with</div>
+          <div class="font-weight-bold fs-24">
+            {{ dashboard.amount }} {{ dashboard.amount > 1 ? "Pages" : "Page" }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2"
+        style="background-color: salmon"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faUser"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">last activity made by</div>
+          <div class="font-weight-bold fs-24">{{ 4 }}</div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-success"
+      >
+        <fa-icon class="fa-5x p-2" [icon]="faClock"></fa-icon>
+        <div class="d-flex justify-content-center flex-column">
+          <div class="d-flex fs-12">last change made at</div>
+          <div class="font-weight-bold fs-24">4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-white m-3 justify-self-center set-div mt-3">
+    <div class="d-flex justify-content-center">
+      <div style="width: 85%">
+        <div class="w-100 justify-content-start">
+          <div class="table-wrapper mt-2 d-flex justify-content-start">
+            <table
+              class="table table-light table-width table-hover table-striped fs-14"
+            >
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Main Editor</th>
+                  <th scope="col">Page Title</th>
+                  <th scope="col">Page Name</th>
+                  <th scope="col">Page Url</th>
+                  <th scope="col">In Menu</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of site">
+                  <td>{{ item.roleId }}</td>
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.url }}</td>
+                  <td *ngIf="item.inNav == false">
+                    <fa-icon
+                      class="hover-fa"
+                      [icon]="faTimes"
+                      (click)="toggleNavigation(item.id)"
+                    ></fa-icon>
+                  </td>
+                  <td *ngIf="item.inNav == true">
+                    <fa-icon
+                      class="hover-fa"
+                      [icon]="faCheck"
+                      (click)="toggleNavigation(item.id)"
+                    ></fa-icon>
+                  </td>
+                  <td>
+                    <fa-icon
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Show HTML View"
+                      (click)="setUrl(item.url)"
+                      [icon]="faEye"
+                      class="mr-2 hover-fa"
+                    ></fa-icon>
+                    <fa-icon
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Edit Body of HTML"
+                      [icon]="faPen"
+                      class="mr-2 hover-fa"
+                      [routerLink]="['/sites/domeditor/', item.url, '#wrapper']"
+                    ></fa-icon>
+
+                    <fa-icon
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      class="hover-fa"
+                      title="Delete HTML Page"
+                      (click)="deletePage(item.id)"
+                      [icon]="faTrashAlt"
+                    ></fa-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-html-viewer
+    [id]="fileUrl"
+    (isOnShow)="toggleViewer($event)"
+    *ngIf="isOnShow"
+  ></app-html-viewer>
+</div>
 <div
-  class="bg-white fs-14 m-3 justify-self-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
+  class="bg-white fs-14 m-3 d-flex justify-content-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
+  *ngIf="!dashboard"
 >
-  <div class="d-flex flex-row w-100 p-2">
-    <div
-      class="d-flex flex-row w-25 mr-5 card bg-primary justify-content-center text-white p-2"
-    >
-      <fa-icon class="fa-5x p-2" [icon]="faHome"></fa-icon>
-      <div class="d-flex justify-content-center flex-column">
-        <div class="d-flex fs-12">main page is</div>
-        <div class="font-weight-bold fs-24">{{ dashboard.title }}</div>
-      </div>
+  <div class="d-flex flex-column">
+    <div class="d-flex justify-content-center">
+      <fa-icon class="fa-10x text-warning" [icon]="faEyeSlash"></fa-icon>
     </div>
-    <div
-      class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-warning"
-    >
-      <fa-icon class="fa-5x p-2" [icon]="faFile"></fa-icon>
-      <div class="d-flex justify-content-center flex-column">
-        <div class="d-flex fs-12">with</div>
-        <div class="font-weight-bold fs-24">4 Pages</div>
-      </div>
-    </div>
-    <div
-      class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2"
-      style="background-color: salmon"
-    >
-      <fa-icon class="fa-5x p-2" [icon]="faUser"></fa-icon>
-      <div class="d-flex justify-content-center flex-column">
-        <div class="d-flex fs-12">last activity made by</div>
-        <div class="font-weight-bold fs-24">
-          {{ dashboard.posts[0].user.login }}
-        </div>
-      </div>
-    </div>
-    <div
-      class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-success"
-    >
-      <fa-icon class="fa-5x p-2" [icon]="faClock"></fa-icon>
-      <div class="d-flex justify-content-center flex-column">
-        <div class="d-flex fs-12">last change made at</div>
-        <div class="font-weight-bold fs-24">
-          {{ splitter(dashboard.posts[0].updatedAt) }}
-        </div>
-      </div>
+    <div class="d-flex justify-content-center mt-3">
+      <h2 class="font-weight-bold">There is no sites to load</h2>
     </div>
   </div>
 </div>
 
-<div class="bg-white m-3 justify-self-center set-div mt-3">
-  <div class="d-flex justify-content-center">
-    <div style="width: 15%">
-      <div class="d-flex justify-content-end mt-2 mr-3">
-        <div routerLink="/sites/add" class="btn bg-success text-white">
-          <fa-icon [icon]="faPlus" class="fs-24 pl-2 pr-2 pt-4 pb-4"></fa-icon>
-        </div>
-      </div>
-    </div>
-    <div style="width: 85%">
-      <div class="w-100 justify-content-start">
-        <div class="table-wrapper mt-2 d-flex justify-content-start">
-          <table
-            class="table table-light table-width table-hover table-striped fs-14"
-          >
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Main Editor</th>
-                <th scope="col">Page Title</th>
-                <th scope="col">Page Name</th>
-                <th scope="col">Page Url</th>
-                <th scope="col">In Menu</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of site">
-                <td>{{ item.roleId }}</td>
-                <td>{{ item.title }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.url }}</td>
-                <td *ngIf="item.inNav == false">
-                  <fa-icon
-                    class="hover-fa"
-                    [icon]="faTimes"
-                    (click)="toggleNavigation(item.id)"
-                  ></fa-icon>
-                </td>
-                <td *ngIf="item.inNav == true">
-                  <fa-icon
-                    class="hover-fa"
-                    [icon]="faCheck"
-                    (click)="toggleNavigation(item.id)"
-                  ></fa-icon>
-                </td>
-                <td>
-                  <fa-icon
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Show HTML View"
-                    (click)="setUrl(item.url)"
-                    [icon]="faEye"
-                    class="mr-2 hover-fa"
-                  ></fa-icon>
-                  <fa-icon
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Edit Body of HTML"
-                    [icon]="faPen"
-                    class="mr-2 hover-fa"
-                    [routerLink]="['/sites/domeditor/', item.url, '#wrapper']"
-                  ></fa-icon>
-
-                  <fa-icon
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    class="hover-fa"
-                    title="Delete HTML Page"
-                    (click)="deletePage(item.id)"
-                    [icon]="faTrashAlt"
-                  ></fa-icon>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+<div>
+  <div
+    class="justify-content-end mt-2 mr-3"
+    style="position: absolute; bottom: 30px; right: 10px"
+  >
+    <div routerLink="/sites/add" class="btn bg-success text-white">
+      <fa-icon [icon]="faPlus" class="fs-24 pl-2 pr-2 pt-4 pb-4"></fa-icon>
     </div>
   </div>
 </div>
-
-<app-html-viewer
-  [id]="fileUrl"
-  (isOnShow)="toggleViewer($event)"
-  *ngIf="isOnShow"
-></app-html-viewer>

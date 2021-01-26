@@ -30,7 +30,9 @@ const postsEndpoint = (router) => {
         const result = await business()
           .getPostManager()
           .getDashboard();
-        response.status(200).send(result);
+        result.amount > 0
+          ? response.status(200).send(result)
+          : response.status(204).send();
       } catch (error) {
         applicationException.errorHandler(error, response);
       }

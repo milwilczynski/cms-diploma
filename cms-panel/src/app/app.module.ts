@@ -12,7 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SiteAdderComponent } from './modules/site/site-adder/site-adder.component';
 import { DomEditorComponent } from './modules/site/dom-editor/dom-editor.component';
 import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-dashboard.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HtmlViewerComponent } from './modules/site/html-viewer/html-viewer.component';
 import { ParamsEditorComponent } from './modules/site/params-editor/params-editor.component';
 import { FormsModule } from '@angular/forms';
@@ -28,6 +28,14 @@ import { PostEditorComponent } from './posts/post-editor/post-editor.component';
 import { EditCommentComponent } from './modules/comments/edit-comment/edit-comment.component';
 import { CommentsDashboardComponent } from './modules/comments/comments-dashboard/comments-dashboard.component';
 import { ShowCommentsComponent } from './modules/comments/show-comments/show-comments.component';
+import { AuthService } from './services/auth/auth-service.service';
+import { AuthInterceptor } from './services/auth/auth.interceptor';
+import { RoleDashboardComponent } from './modules/roles/role-dashboard/role-dashboard.component';
+import { RoleEditorComponent } from './modules/roles/role-editor/role-editor.component';
+import { RoleAdderComponent } from './modules/roles/role-adder/role-adder.component';
+import { UsersDashboardComponent } from './modules/users/users-dashboard/users-dashboard.component';
+import { UsersAdderComponent } from './modules/users/users-adder/users-adder.component';
+import { UsersEditorComponent } from './modules/users/users-editor/users-editor.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +61,12 @@ import { ShowCommentsComponent } from './modules/comments/show-comments/show-com
     EditCommentComponent,
     CommentsDashboardComponent,
     ShowCommentsComponent,
+    RoleDashboardComponent,
+    RoleEditorComponent,
+    RoleAdderComponent,
+    UsersDashboardComponent,
+    UsersAdderComponent,
+    UsersEditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +77,10 @@ import { ShowCommentsComponent } from './modules/comments/show-comments/show-com
     ReactiveFormsModule,
     AngularEditorModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
