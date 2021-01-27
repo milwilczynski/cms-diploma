@@ -50,21 +50,21 @@ export class RoleDashboardComponent implements OnInit {
     this.fetchDashboard();
   }
 
-  fetchRoles() {
+  fetchRoles(): void {
     this.roleService.getAllRoles().subscribe((response) => {
       this.roles = response;
     });
   }
 
-  fetchDashboard() {
+  fetchDashboard(): void {
     this.roleService.getDashboard().subscribe((response) => {
       this.dashboard = response;
     });
   }
 
-  deleteRole(id: number) {
+  deleteRole(id: number): void {
     this.roleService.deleteRole(id).subscribe((response) => {
-      this.dashboard = response;
+      console.log(response);
     });
   }
 }

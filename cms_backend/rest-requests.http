@@ -1,7 +1,7 @@
 ##############
 #### USER ####
 ##############
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibG9naW4iOiJqZG9lIiwibmFtZSI6IkpvaG4iLCJzdXJuYW1lIjoiRG9lIiwiaWF0IjoxNjExMzUyNTY0fQ.UGfdmkF8CpwTUSQFKbShjbn88lAicq63LPdMhq2rqTQ
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInN1cm5hbWUiOiJhZG1pbiIsImlhdCI6MTYxMTY4NDY4MH0.FfhGLfnUbYmGJfycxEgbgcPLLqx2dLM4JeI_-WH1Z9M
 ###
 #Shows all users in db
 ###
@@ -9,18 +9,59 @@ GET http://localhost:8080/api/user
 X-Auth-Token: {{authToken}}
 
 ###
-#Creates User
+#Gets one user from db
 ###
-POST http://localhost:8080/api/user/create HTTP/1.1
+GET http://localhost:8080/api/user/49
+
+###
+#Gets users by role
+###
+GET http://localhost:8080/api/role/3/user
+
+###
+#Deletes user by id
+###
+DELETE http://localhost:8080/api/user/3
+
+###
+#Adds user to db
+###
+PUT http://localhost:8080/api/user
 content-type: application/json
 
 {
-    "login": "test",
+    "login": "test13",
     "password": "test",
-    "email": "test@gmail.com",
+    "email": "test14@gmail.com",
     "name": "milek",
-    "surname": "wilk"
+    "surname": "wilk",
+    "roles": [
+        {
+            "id": 1,
+            "value": true
+        },
+        {
+            "id": 2, 
+            "value": true
+        }
+    ]
 }
+
+###
+#Edits user
+###
+POST http://localhost:8080/api/user
+content-type: application/json
+
+{
+
+}
+
+###
+#Gets dashboard
+###
+GET http://localhost:8080/api/user-dashboard
+
 
 
 ###
@@ -30,7 +71,7 @@ POST http://localhost:8080/api/user/auth HTTP/1.1
 content-type: application/json
 
 {
-    "emailorlogin": "jdoe",
+    "emailorlogin": "admin",
     "password": "admin"
 }
 

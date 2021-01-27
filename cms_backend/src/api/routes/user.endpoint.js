@@ -20,15 +20,86 @@ const userEndpoint = (router) => {
     },
   );
 
+  router.get('/api/user/:id', async (request, response, next) => {
+    try {
+      const result = await business()
+        .getUserManager()
+        .getUserById(request.params.id);
+      result
+        ? response.status(200).send(result)
+        : response.status(204).send();
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
+  });
+
+  router.get(
+    '/api/user-dashboard',
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getUserManager()
+          .getDashboard(request.params.id);
+        result.amount > 0
+          ? response.status(200).send(result)
+          : response.status(204).send();
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
+
+  router.get(
+    '/api/role/:id/user',
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getUserManager()
+          .getUsersByRole(request.params.id);
+        result
+          ? response.status(200).send(result)
+          : response.status(204).send();
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
+
+  router.delete('/api/user/:id', async (request, response, next) => {
+    try {
+      const result = await business()
+        .getUserManager()
+        .deleteUserById(request.params.id);
+      result
+        ? response.status(200).send(result)
+        : response.status(204).send();
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
+  });
+
   /**
    * Endpoints which creates user - checking if mail/login is taken
    * then hashes password
    */
-  router.post('/api/user/create', async (request, response, next) => {
+  router.put('/api/user', async (request, response, next) => {
     try {
       const result = await business()
         .getUserManager()
         .createNew(request.body);
+      result
+        ? response.status(200).send(result)
+        : response.status(204).send();
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
+  });
+
+  router.post('/api/user-edit', async (request, response, next) => {
+    try {
+      const result = await business()
+        .getUserManager()
+        .editUser(request.body);
       response.status(200).send(result);
     } catch (error) {
       applicationException.errorHandler(error, response);

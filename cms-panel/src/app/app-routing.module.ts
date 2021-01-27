@@ -12,6 +12,9 @@ import { RoleEditorComponent } from './modules/roles/role-editor/role-editor.com
 import { DomEditorComponent } from './modules/site/dom-editor/dom-editor.component';
 import { SiteAdderComponent } from './modules/site/site-adder/site-adder.component';
 import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-dashboard.component';
+import { UsersAdderComponent } from './modules/users/users-adder/users-adder.component';
+import { UsersDashboardComponent } from './modules/users/users-dashboard/users-dashboard.component';
+import { UsersEditorComponent } from './modules/users/users-editor/users-editor.component';
 import { AddpostComponent } from './posts/addpost/addpost.component';
 import { PostEditorComponent } from './posts/post-editor/post-editor.component';
 import { PostdashboardComponent } from './posts/postdashboard/postdashboard.component';
@@ -74,6 +77,18 @@ const routes: Routes = [
       {
         path: 'roles/:id',
         component: RoleEditorComponent,
+      },
+      {
+        path: 'users',
+        component: UsersDashboardComponent,
+      },
+      {
+        path: 'users/add',
+        component: UsersAdderComponent,
+      },
+      {
+        path: 'users/:id',
+        component: UsersEditorComponent,
       },
     ],
   },

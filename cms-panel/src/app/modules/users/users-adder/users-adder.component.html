@@ -1,1 +1,97 @@
-<p>users-adder works!</p>
+<div class="bg-white m-3 justify-self-center set-div mt-3">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex">
+      <div class="d-flex justify-content-end flex-column pr-3 mb-2">
+        <div class="d-flex fs-20 justify-content-end">You're adding</div>
+        <div class="d-flex font-weight-bold fs-28 justify-content-end">
+          <span class="float-right text-warning">User</span>
+        </div>
+      </div>
+    </div>
+    <div style="width: 85%">
+      <div class="form-group">
+        <div class="form-group d-flex">
+          <div class="d-flex flex-column w-100">
+            <div class="d-flex flex-wrap">
+              <div
+                *ngFor="let item of roles"
+                class="custom-control custom-switch mr-2"
+              >
+                <input
+                  type="checkbox"
+                  class="custom-control-input"
+                  value="{{ item.id }}"
+                  id="role{{ item.id }}"
+                />
+                <label class="custom-control-label" for="role{{ item.id }}">{{
+                  item.name.charAt(0).toUpperCase() + item.name.slice(1)
+                }}</label>
+              </div>
+            </div>
+            <div class="mt-2">
+              <label for="exampleFormControlInput5">Login</label>
+              <div class="d-flex flex-row">
+                <input
+                  [(ngModel)]="login"
+                  type="text"
+                  class="form-control fs-14"
+                  placeholder="johndoe"
+                />
+              </div>
+            </div>
+            <div class="mt-2">
+              <label for="exampleFormControlInput5">Password</label>
+              <div class="d-flex flex-row">
+                <input
+                  [(ngModel)]="password"
+                  type="password"
+                  class="form-control fs-14"
+                  placeholder="asdfasdfasfd"
+                />
+              </div>
+            </div>
+            <div class="mt-2">
+              <label for="exampleFormControlInput1">Email</label>
+              <div class="d-flex flex-row">
+                <input
+                  [(ngModel)]="email"
+                  type="text"
+                  class="form-control fs-14"
+                  placeholder="johndoe@gmail.com"
+                />
+              </div>
+            </div>
+            <div class="mt-2">
+              <label for="exampleFormControlInput3">Name</label>
+              <div class="d-flex flex-row">
+                <input
+                  [(ngModel)]="name"
+                  type="text"
+                  class="form-control fs-14"
+                  placeholder="John"
+                />
+              </div>
+            </div>
+            <div class="mt-2">
+              <label for="exampleFormControlInput4">Surname</label>
+              <div class="d-flex flex-row">
+                <input
+                  [(ngModel)]="surname"
+                  type="text"
+                  class="form-control fs-14"
+                  id="exampleFormControlInput6"
+                  placeholder="Doe"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn btn-primary" (click)="addUser()">
+            Create
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
