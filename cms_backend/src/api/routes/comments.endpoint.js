@@ -17,7 +17,7 @@ const commentsEndpoint = (router) => {
   });
 
   router.get(
-    '/api/comments/dashboard/comment',
+    '/api/comments-dashboard/comment',
     async (request, response, next) => {
       try {
         const result = await business()
@@ -31,17 +31,6 @@ const commentsEndpoint = (router) => {
       }
     },
   );
-
-  router.get('/api/comments/:id', async (request, response, next) => {
-    try {
-      const result = await business()
-        .getCommentManager()
-        .getCommentsFromPage(request.params.id);
-      response.status(200).send(result);
-    } catch (error) {
-      applicationException.errorHandler(error, response);
-    }
-  });
 
   router.get('/api/comments/:id', async (request, response, next) => {
     try {

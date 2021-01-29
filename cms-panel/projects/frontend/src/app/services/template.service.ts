@@ -23,4 +23,16 @@ export class TemplateService {
       url: fileUrl,
     });
   }
+
+  getNavigationBar() {
+    return this.http.get(this.url + '-navbar');
+  }
+
+  getDomById(id: number) {
+    return this.http.get<HTML>(this.url + '/' + id);
+  }
+
+  getConfig(): any {
+    return this.http.get('http://localhost:8080/api/settings');
+  }
 }

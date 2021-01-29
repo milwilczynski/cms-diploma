@@ -21,8 +21,6 @@
     "allowJs": true
   },
   "angularCompilerOptions": {
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "enableIvy": true
   }
 }

@@ -8,6 +8,7 @@ import { TemplateService } from '../../services/template.service';
 })
 export class MenuComponent implements OnInit {
   template: string = '';
+  navbar!: any;
   constructor(private templateService: TemplateService) {}
 
   ngOnInit(): void {
@@ -19,9 +20,6 @@ export class MenuComponent implements OnInit {
       .getDom('public\\sites\\index.html', '#menu')
       .subscribe((request) => {
         this.template = request.html;
-        /*if (this.template != '') {
-          this.loadScript();
-        }*/
       });
   }
 }

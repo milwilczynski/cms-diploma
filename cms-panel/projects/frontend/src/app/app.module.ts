@@ -3,6 +3,7 @@ import {
   Compiler,
   CompilerFactory,
   COMPILER_OPTIONS,
+  CUSTOM_ELEMENTS_SCHEMA,
   NgModule,
 } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,12 @@ import { JitCompilerFactory } from '@angular/platform-browser-dynamic';
 import { DynamicRendererComponent } from './components/dynamic-renderer/dynamic-renderer.component';
 import { PostsComponent } from './components/posts/dashboard/posts.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BodyRendererComponent } from './components/body-renderer/body-renderer.component';
+import { Router, RouteReuseStrategy } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ShowPostComponent } from './components/posts/show-post/show-post.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LinksComponent } from './modules/links/links.component';
 
 export function createCompiler(compilerFactory: CompilerFactory) {
   return compilerFactory.createCompiler();
@@ -31,8 +38,18 @@ export function createCompiler(compilerFactory: CompilerFactory) {
     MainComponent,
     DynamicRendererComponent,
     PostsComponent,
+    BodyRendererComponent,
+    ShowPostComponent,
+    LinksComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [
     { provide: COMPILER_OPTIONS, useValue: {}, multi: true },
     {
@@ -43,5 +60,6 @@ export function createCompiler(compilerFactory: CompilerFactory) {
     { provide: Compiler, useFactory: createCompiler, deps: [CompilerFactory] },
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

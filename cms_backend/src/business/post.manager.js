@@ -39,6 +39,42 @@ function create(context) {
     }
   }
 
+  async function getPostsBySiteName(name) {
+    try {
+      let posts = await models.post.findAll({
+        include: [
+          {
+            model: models.user,
+            attributes: ['login', 'id'],
+          },
+          {
+            model: models.site,
+            attributes: ['title', 'id', 'name'],
+            where: {
+              name: name + '.html',
+            },
+          },
+        ],
+        attributes: {
+          exclude: ['userId'],
+        },
+        order: [
+          ['siteId', 'ASC'],
+          ['createdAt', 'DESC'],
+        ],
+      });
+      if (posts == null || posts.length == 0) {
+        return applicationException.new(
+          applicationException.NOT_FOUND,
+          'No posts found',
+        );
+      }
+      return posts;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async function getPostsFromSite(siteId) {
     try {
       let posts = await models.post.findAll({
@@ -273,6 +309,7 @@ function create(context) {
   return {
     getAllPosts,
     getPostsFromSite,
+    getPostsBySiteName,
     getNewestPostFromEverySite,
     getDashboard,
     getPostsAmount,

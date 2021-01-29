@@ -1,6 +1,15 @@
-<div>
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore vel illo
-  laboriosam, laudantium quis aliquam officia magnam obcaecati, perspiciatis
-  quibusdam possimus itaque animi autem architecto fugit voluptatibus eaque
-  dicta rem.
+<div *ngIf="posts">
+  <div *ngFor="let item of posts" class="card text-center">
+    <div class="card-body">
+      <h5 class="d-flex w-100">{{ item.title }}</h5>
+      <h6 class="d-flex w-100 text-muted font-weight-normal">
+        {{ item.subtitle }}
+      </h6>
+      <p class="d-flex w-100">
+        {{ item.content }}
+      </p>
+      <a class="btn btn-primary" routerLink="post/{{ item.id }}">Show more</a>
+    </div>
+    <div class="card-footer text-muted">{{ splitter(item.createdAt) }}</div>
+  </div>
 </div>

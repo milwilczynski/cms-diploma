@@ -24,7 +24,7 @@ export class CommentsDashboardComponent implements OnInit {
   posts!: any[];
   sites!: any;
   comments!: any;
-  dashboard!: any;
+  dashboard: any = null;
   selectedPage!: number;
   faPosts = faClipboard;
   faHeading = faHeading;

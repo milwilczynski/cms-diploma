@@ -109,7 +109,7 @@ const userEndpoint = (router) => {
   /**
    * Endpoint which allow to login user onto server
    */
-  router.post('/api/user/auth', async (request, response, next) => {
+  router.post('/api/user-auth', async (request, response, next) => {
     try {
       const result = await business()
         .getUserManager()

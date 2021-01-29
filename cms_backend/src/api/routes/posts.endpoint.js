@@ -24,6 +24,20 @@ const postsEndpoint = (router) => {
   });
 
   router.get(
+    '/api/posts-bysitename/:name',
+    async (request, response, next) => {
+      try {
+        const result = await business()
+          .getPostManager()
+          .getPostsBySiteName(request.params.name);
+        response.status(200).send(result);
+      } catch (error) {
+        applicationException.errorHandler(error, response);
+      }
+    },
+  );
+
+  router.get(
     '/api/posts/dashboard/post',
     async (request, response, next) => {
       try {

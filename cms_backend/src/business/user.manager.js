@@ -135,7 +135,10 @@ function create(context) {
   async function editUser(userData) {
     const transaction = await sequelize.transaction();
     try {
-      const user = await models.user.update(
+      const user = await models.user.findByPk(userData.id);
+      if (!user) return user;
+
+      await user.update(
         {
           login: userData.login,
           email: userData.email,
@@ -147,10 +150,10 @@ function create(context) {
         },
       );
 
-      const userRoles = await models.user_roles.findAll(
+      await models.user_roles.destroy(
         {
           where: {
-            id: user.id,
+            userId: user.id,
           },
         },
         {
@@ -158,12 +161,8 @@ function create(context) {
         },
       );
 
-      await userRoles.destroy({
-        transaction,
-      });
-
       var rolesData = [];
-      tempData.roles.forEach((role) => {
+      userData.roles.forEach((role) => {
         if (role.value == true) {
           rolesData.push({
             userId: user.id,

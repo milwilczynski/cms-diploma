@@ -43,6 +43,6 @@ export class CommentsService {
   }
 
   getDashboard() {
-    return this.http.get(this.url + '/dashboard/comment');
+    return this.http.get(this.url + '-dashboard/comment');
   }
 }

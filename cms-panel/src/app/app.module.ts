@@ -36,7 +36,10 @@ import { RoleAdderComponent } from './modules/roles/role-adder/role-adder.compon
 import { UsersDashboardComponent } from './modules/users/users-dashboard/users-dashboard.component';
 import { UsersAdderComponent } from './modules/users/users-adder/users-adder.component';
 import { UsersEditorComponent } from './modules/users/users-editor/users-editor.component';
-
+import { ColorPickerComponent } from './modules/color-picker/color-picker.component';
+import { LayoutPickerComponent } from './modules/layout-picker/layout-picker.component';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { SettingsComponent } from './modules/settings/settings.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -67,6 +70,9 @@ import { UsersEditorComponent } from './modules/users/users-editor/users-editor.
     UsersDashboardComponent,
     UsersAdderComponent,
     UsersEditorComponent,
+    ColorPickerComponent,
+    LayoutPickerComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +82,7 @@ import { UsersEditorComponent } from './modules/users/users-editor/users-editor.
     FormsModule,
     ReactiveFormsModule,
     AngularEditorModule,
+    ColorPickerModule,
   ],
   providers: [
     AuthService,

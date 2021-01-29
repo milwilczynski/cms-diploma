@@ -69,7 +69,7 @@ export class SiteService {
   }
 
   getDashboardInfo() {
-    return this.http.get(this.url + '/main');
+    return this.http.get(this.url + '-main');
   }
 
   toggleNavigation(id: number) {

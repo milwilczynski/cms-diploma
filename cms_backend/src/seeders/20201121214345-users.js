@@ -96,6 +96,19 @@ module.exports = {
       },
     ]);
 
+    await queryInterface.bulkInsert('settings', [
+      {
+        isHeader: true,
+        menuColor: '#dc1f1f',
+        headerColor: '#3d9d05',
+        bodyColor: '#e7e5e5',
+        navbarColor: '#008bd4',
+        layout: 'modern',
+        createdAt: date,
+        updatedAt: date,
+      },
+    ]);
+
     await queryInterface.bulkInsert;
   },
 

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Compiler,
   Component,
@@ -13,10 +14,15 @@ import {
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FooterComponent } from '../../main/footer/footer.component';
 import { HeaderComponent } from '../../main/header/header.component';
 import { MenuComponent } from '../../main/menu/menu.component';
+import { LinksComponent } from '../../modules/links/links.component';
 import { TemplateService } from '../../services/template.service';
+import { PostsComponent } from '../posts/dashboard/posts.component';
 
 @Component({
   selector: 'app-dynamic-renderer',
@@ -56,11 +62,19 @@ export class DynamicRendererComponent implements OnInit {
     );
 
     //components which i want to use within dynamic component
-    const components = [tmpCmp];
+    const components = [tmpCmp, PostsComponent, LinksComponent, Input];
 
-    //inicjating module
+    const imports = [
+      BrowserModule,
+      CommonModule,
+      RouterModule,
+      FormsModule,
+      ReactiveFormsModule,
+    ];
+    //module
     const tmpModule = NgModule({
       declarations: components,
+      imports: imports,
     })(class {});
 
     this._compiler

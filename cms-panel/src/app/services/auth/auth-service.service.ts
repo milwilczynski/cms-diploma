@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   authUser(body: any): Observable<any> {
-    return this.http.post<Auth>(this.url + '/auth', body).pipe(
+    return this.http.post<Auth>(this.url + '-auth', body).pipe(
       map((result: Auth) => {
         if (result && result.token) {
           localStorage.setItem('token', result.token);

@@ -13,12 +13,27 @@ const sitesEndpoint = (router) => {
         const result = await business()
           .getSiteManager()
           .getHtmlContent(request.body.dom, request.body.url);
-        response.status(200).send(result);
+        if (result) {
+          response.status(200).send(result);
+        } else {
+          response.status(204).send();
+        }
       } catch (error) {
         applicationException.errorHandler(error, response);
       }
     },
   );
+
+  router.get('/api/sites/:id', async (request, response, next) => {
+    try {
+      const result = await business()
+        .getSiteManager()
+        .getHtmlContentById(request.params.id);
+      response.status(200).send(result);
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
+  });
 
   router.post(
     '/api/sites/htmlcontent/update',
@@ -96,7 +111,20 @@ const sitesEndpoint = (router) => {
     },
   );
 
-  router.get('/api/sites/main', async (request, response, next) => {
+  router.get('/api/sites-navbar', async (request, response, next) => {
+    try {
+      const result = await business()
+        .getSiteManager()
+        .getAllHtmlInNavBar();
+      result.length > 0
+        ? response.status(200).send(result)
+        : response.status(204).send();
+    } catch (error) {
+      applicationException.errorHandler(error, response);
+    }
+  });
+
+  router.get('/api/sites-main', async (request, response, next) => {
     try {
       const result = await business().getSiteManager().getMainPage();
       result.amount > 0

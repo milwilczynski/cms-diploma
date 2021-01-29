@@ -9,6 +9,7 @@ import { LoginComponent } from './modules/login/login.component';
 import { RoleAdderComponent } from './modules/roles/role-adder/role-adder.component';
 import { RoleDashboardComponent } from './modules/roles/role-dashboard/role-dashboard.component';
 import { RoleEditorComponent } from './modules/roles/role-editor/role-editor.component';
+import { SettingsComponent } from './modules/settings/settings.component';
 import { DomEditorComponent } from './modules/site/dom-editor/dom-editor.component';
 import { SiteAdderComponent } from './modules/site/site-adder/site-adder.component';
 import { SitesDashboardComponent } from './modules/site/sites-dashboard/sites-dashboard.component';
@@ -89,6 +90,10 @@ const routes: Routes = [
       {
         path: 'users/:id',
         component: UsersEditorComponent,
+      },
+      {
+        path: 'settings',
+        component: SettingsComponent,
       },
     ],
   },

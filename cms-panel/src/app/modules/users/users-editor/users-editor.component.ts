@@ -65,12 +65,14 @@ export class UsersEditorComponent implements OnInit {
       jsonArr.push({ id: parseInt(id), value: isChecked });
     }
     const body = {
+      id: this.userId,
       login: this.login,
       email: this.email,
       name: this.name,
       surname: this.surname,
       roles: jsonArr,
     };
+
     this.userService.editUser(body).subscribe((response) => {
       console.log(response);
     });

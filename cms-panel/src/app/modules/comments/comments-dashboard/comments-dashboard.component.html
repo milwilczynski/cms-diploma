@@ -1,4 +1,4 @@
-<div *ngIf="dashboard">
+<div *ngIf="dashboard != null">
   <div
     class="bg-white fs-14 m-3 justify-self-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
   >
@@ -48,34 +48,8 @@
       </div>
     </div>
   </div>
-  <div class="bg-white m-3 justify-self-center set-div mt-3">
+  <div class="bg-white m-3 justify-self-center set-div mt-3" *ngIf="comments">
     <div class="d-flex justi justify-content-center">
-      <div class="d-flex flex-column" style="width: 15%">
-        <div class="d-flex justify-content-end mt-2 mr-3">
-          <div routerLink="/posts/add" class="btn bg-success text-white">
-            <fa-icon
-              [icon]="faPlus"
-              class="fs-24 pl-2 pr-2 pt-4 pb-4"
-            ></fa-icon>
-          </div>
-        </div>
-        <div class="d-flex flex-column p-3 f-12">
-          <div>Fetch by page</div>
-          <div class="input-group mb-3">
-            <select
-              [(ngModel)]="selectedPage"
-              class="custom-select"
-              id="inputGroupSelect01"
-              (change)="selectPage()"
-            >
-              <option selected value="0">Any</option>
-              <option *ngFor="let item of sites" [ngValue]="item.id">
-                {{ item.title }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
       <div style="width: 85%">
         <div class="w-100 justify-content-start">
           <div class="table-wrapper mt-2 d-flex justify-content-start">

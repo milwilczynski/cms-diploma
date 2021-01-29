@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TemplateService } from '../../services/template.service';
 
 @Component({
@@ -7,21 +8,35 @@ import { TemplateService } from '../../services/template.service';
   styleUrls: ['./wrapper.component.css'],
 })
 export class WrapperComponent implements OnInit {
+  siteName: any = null;
   template: string = '';
-  constructor(private templateService: TemplateService) {}
+  constructor(
+    private templateService: TemplateService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.getBody();
+    this.route.paramMap.subscribe((param) => {
+      this.siteName = param.get('name');
+      if (this.siteName == null) {
+        this.getBody('index');
+      } else {
+        this.getBodyById(this.siteName);
+      }
+    });
   }
 
-  getBody() {
+  getBody(name: string) {
     this.templateService
-      .getDom('public\\sites\\index.html', '#wrapper')
+      .getDom('public\\sites\\' + name + '.html', '#wrapper')
       .subscribe((request) => {
         this.template = request.html;
-        /*if (this.template != '') {
-          this.loadScript();
-        }*/
       });
+  }
+
+  getBodyById(id: number) {
+    this.templateService.getDomById(id).subscribe((request) => {
+      this.template = request.html;
+    });
   }
 }

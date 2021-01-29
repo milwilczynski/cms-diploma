@@ -71,6 +71,7 @@ export class SitesDashboardComponent implements OnInit {
   fetchDashboard() {
     this.siteService.getDashboardInfo().subscribe((response) => {
       this.dashboard = response;
+      console.log(this.dashboard);
     });
   }
 

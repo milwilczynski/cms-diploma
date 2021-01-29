@@ -3,5 +3,12 @@
 
 <div id="siema" class="header">TUTAJ HEADER BYCZKU 69 420 1337</div>
 -->
-<app-main></app-main>
-<script type="text/javascript" [src]='dynamicJSUrl'></script>
+
+<router-outlet *ngIf="isSite"></router-outlet>
+<script *ngIf="isSite" type="text/javascript" [src]="dynamicJSUrl"></script>
+<div *ngIf="!isSite" class="d-flex w-100 justify-content-center">
+  <h2>
+    There is no main site to load - please use CMS to add a new .html file named
+    "index.html"
+  </h2>
+</div>

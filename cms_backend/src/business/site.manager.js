@@ -21,15 +21,37 @@ function create(context) {
           url: url,
         },
       });
-      if (site == null) {
-        throw applicationException.new(
-          applicationException.NOT_FOUND,
-          'Provied file not found',
-        );
+      if (!site) {
+        return site;
       }
       const data = await utility().getFileUtility().reader(site.url);
       const $ = cheerio.load(data);
       const html = $(dom).html();
+      if (!html) {
+        return html;
+      }
+      const template = {
+        html: html,
+      };
+      return template;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function getHtmlContentById(id) {
+    try {
+      const site = await models.site.findOne({
+        where: {
+          id: id,
+        },
+      });
+      if (site == null) {
+        return site;
+      }
+      const data = await utility().getFileUtility().reader(site.url);
+      const $ = cheerio.load(data);
+      const html = $('#wrapper').html();
       if (!html) {
         throw applicationException.new(
           applicationException.NOT_FOUND,
@@ -212,10 +234,26 @@ function create(context) {
     }
   }
 
+  async function getAllHtmlInNavBar() {
+    try {
+      const sites = await models.site.findAll({
+        where: {
+          inNav: true,
+        },
+      });
+
+      return sites;
+    } catch (error) {
+      return error;
+    }
+  }
+
   return {
     updateHtmlContent,
     getHtmlContent,
     getMainPage,
+    getAllHtmlInNavBar,
+    getHtmlContentById,
     changeNavigation,
     addSite,
     deleteSite,

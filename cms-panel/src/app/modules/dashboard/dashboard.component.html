@@ -1,1 +1,52 @@
-<p>dashboard works!</p>
+<div
+  *ngIf="dashboard"
+  class="bg-white fs-14 m-3 justify-self-center set-div pt-3 pb-1 mt-3 pr-3 pl-3"
+>
+  <div class="d-flex flex-row w-100 p-2">
+    <div
+      class="d-flex flex-row w-25 mr-5 card bg-primary justify-content-center text-white p-2"
+    >
+      <fa-icon class="fa-5x p-2" [icon]="faPosts"></fa-icon>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex fs-12">created posts</div>
+        <div class="font-weight-bold fs-24">{{ dashboard.amount }}</div>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-warning"
+    >
+      <div class="d-flex w-50 justify-content-end">
+        <fa-icon class="fa-5x p-2" [icon]="faHeading"></fa-icon>
+      </div>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex fs-12">latest post</div>
+        <div class="font-weight-bold fs-24">
+          {{ stringCutter(dashboard.post.title) }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2"
+      style="background-color: salmon"
+    >
+      <fa-icon class="fa-5x p-2" [icon]="faUser"></fa-icon>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex fs-12">last activity made by</div>
+        <div class="font-weight-bold fs-24">
+          {{ dashboard.post.user.login }}
+        </div>
+      </div>
+    </div>
+    <div
+      class="d-flex flex-row w-25 mr-5 card text-white justify-content-center p-2 bg-success"
+    >
+      <fa-icon class="fa-5x p-2" [icon]="faClock"></fa-icon>
+      <div class="d-flex justify-content-center flex-column">
+        <div class="d-flex fs-12">last change made at</div>
+        <div class="font-weight-bold fs-24">
+          {{ splitter(dashboard.post.updatedAt) }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

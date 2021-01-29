@@ -134,7 +134,7 @@ POST http://localhost:8080/api/sites/htmlcontent HTTP/1.1
 content-type: application/json
 
 {
-    "dom": "#footer",
+    "dom": "#wrapper",
     "url": "public\\sites\\index.html"
 }
 
@@ -167,6 +167,13 @@ content-type: application/json
 #Gets main html
 ###
 GET http://localhost:8080/api/sites/main HTTP/1.1
+content-type: application/json
+
+
+###
+#
+###
+GET http://localhost:8080/api/sites/3 HTTP/1.1
 content-type: application/json
 
 ###
@@ -234,6 +241,12 @@ content-type: application/json
 #Gets one post
 ###
 GET http://localhost:8080/api/posts/6/post HTTP/1.1
+content-type: application/json
+
+###
+#Gets posts by name
+###
+GET http://localhost:8080/api/posts-bysitename/index HTTP/1.1
 content-type: application/json
 
 ###
@@ -311,4 +324,10 @@ content-type: application/json
 #Gets dashboard
 ###
 GET http://localhost:8080/api/comments/dashboard/comment HTTP/1.1
+content-type: application/json
+
+######
+###SETTINGS
+####
+GET http://localhost:8080/api/settings HTTP/1.1
 content-type: application/json

@@ -10,19 +10,20 @@ function setModernLayout() {
 
   //set menu layout
   var menu = document.getElementById("menu");
-  menu.className += "navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom";
+  menu.className +=
+    "d-flex w-100 justify-content-between text-white navbar navbar-expand-lg navbar-dark fixed-bottom";
 
   //set header layout
   var header = document.getElementById("header");
-  header.className += "bg-primary text-white";
+  header.className += "text-white";
 
   //set wrapper layout
   var wrapper = document.getElementById("wrapper");
-  wrapper.className += "container";
+  wrapper.className += "w-100";
 
   //set footer layout
   var footer = document.getElementById("footer");
-  footer.className += "py-5 bg-dark";
+  footer.className += "py-5";
 }
 
 resetClassName();
