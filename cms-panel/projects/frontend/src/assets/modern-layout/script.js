@@ -10,12 +10,11 @@ function setModernLayout() {
 
   //set menu layout
   var menu = document.getElementById("menu");
-  menu.className +=
-    "d-flex w-100 justify-content-between navbar navbar-expand-lg navbar-dark bg-dark fixed-top text-white";
+  menu.className += "w-100 fixed-top";
 
   //set header layout
   var header = document.getElementById("header");
-  header.className += "w-100 bg-primary";
+  header.className += "w-100";
 
   //set wrapper layout
   var wrapper = document.getElementById("wrapper");
@@ -23,7 +22,7 @@ function setModernLayout() {
 
   //set footer layout
   var footer = document.getElementById("footer");
-  footer.className += "w-100 py-5 bg-dark";
+  footer.className += "w-100";
 }
 
 resetClassName();

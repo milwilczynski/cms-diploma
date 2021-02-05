@@ -47,7 +47,6 @@ function create(context) {
    * @param {*} file
    */
   function uploadHtml(file, request) {
-    console.log(request);
     const maxSize = 1 * 1000 * 1000;
     var storage = multer.diskStorage({
       destination: function (req, file, cb) {

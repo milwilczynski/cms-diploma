@@ -31,7 +31,9 @@
         <fa-icon class="fa-5x p-2" [icon]="faUser"></fa-icon>
         <div class="d-flex justify-content-center flex-column">
           <div class="d-flex fs-12">last activity made by</div>
-          <div class="font-weight-bold fs-24">{{ 4 }}</div>
+          <div class="font-weight-bold fs-24">
+            {{ "admin" }}
+          </div>
         </div>
       </div>
       <div
@@ -40,7 +42,9 @@
         <fa-icon class="fa-5x p-2" [icon]="faClock"></fa-icon>
         <div class="d-flex justify-content-center flex-column">
           <div class="d-flex fs-12">last change made at</div>
-          <div class="font-weight-bold fs-24">4</div>
+          <div class="font-weight-bold fs-24">
+            {{ splitter(dashboard.site.updatedAt) }}
+          </div>
         </div>
       </div>
     </div>

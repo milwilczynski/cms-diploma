@@ -18,7 +18,6 @@ function setModernLayout() {
   //set header layout
   var header = document.getElementById("header");
   header.className += "";
-  header.style.height = "10vh";
   header.style.width = "100%";
 
   //set wrapper layout
@@ -29,7 +28,6 @@ function setModernLayout() {
   //set footer layout
   var footer = document.getElementById("footer");
   footer.className += "w-100 float-bottom";
-  footer.style.height = "10vh";
 }
 
 resetClassName();

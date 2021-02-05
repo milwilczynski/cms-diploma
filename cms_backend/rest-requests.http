@@ -166,7 +166,7 @@ content-type: application/json
 ###
 #Gets main html
 ###
-GET http://localhost:8080/api/sites/main HTTP/1.1
+GET http://localhost:8080/api/sites-main HTTP/1.1
 content-type: application/json
 
 

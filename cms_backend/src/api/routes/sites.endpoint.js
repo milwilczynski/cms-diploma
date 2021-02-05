@@ -58,7 +58,6 @@ const sitesEndpoint = (router) => {
       var upload = await business()
         .getFileUtility()
         .uploadHtml('html');
-
       await upload(request, response, async function (file, err) {
         if (request.fileValidationError) {
           return response.send(request.fileValidationError);
