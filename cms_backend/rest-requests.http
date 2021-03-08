@@ -1,7 +1,7 @@
 ##############
 #### USER ####
 ##############
-@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInN1cm5hbWUiOiJhZG1pbiIsImlhdCI6MTYxMTY4NDY4MH0.FfhGLfnUbYmGJfycxEgbgcPLLqx2dLM4JeI_-WH1Z9M
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInN1cm5hbWUiOiJhZG1pbiIsImlhdCI6MTYxMjU1ODkzMn0.fg_jDOPxzIr7cgILdvXvJaBzZpr9TC1y05wWXR_hFjw
 ###
 #Shows all users in db
 ###
@@ -67,7 +67,7 @@ GET http://localhost:8080/api/user-dashboard
 ###
 #Login for User with JWT response
 ###
-POST http://localhost:8080/api/user/auth HTTP/1.1
+POST http://localhost:8080/api/user-auth HTTP/1.1
 content-type: application/json
 
 {
@@ -160,7 +160,7 @@ content-type: application/json
 #Gets all html 
 ###
 GET http://localhost:8080/api/sites HTTP/1.1
-X-Auth-Token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjExMzQwNTQ1fQ.Jo2YiZvoo7fTljftLE9kjDZlTdyUXuJ0u3EXyml_u28
+X-Auth-Token: {{authToken}}
 content-type: application/json
 
 ###
