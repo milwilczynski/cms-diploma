@@ -1,29 +1,68 @@
 /*
 * Main colors, used in app
 */
-.bg-teal{
-  background-color: rgb(0,128,128) !important;
+body {
+  font-size: 14px;
+}
+
+.bg-teal {
+  background-color: rgb(0, 128, 128) !important;
   color: #fff !important;
 }
-.bb-teal{
+.bb-teal {
   border-bottom-color: rgb(0, 128, 128) !important;
 }
-.bb-w-2{
+.bb-w-2 {
   border-bottom-width: 2px !important;
 }
 
-.bb-none{
+.bb-none {
   border-bottom-width: 0px;
 }
 
-.fs-12{
+.bg-main-gray {
+  background-color: #f1f0f0;
+}
+
+.fs-12 {
   font-size: 12px !important;
 }
 
-.fs-15{
+.fs-13 {
+  font-size: 13px !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.fs-15 {
   font-size: 15px !important;
 }
 
+.fs-16 {
+  font-size: 16px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
+}
+
+.fs-20 {
+  font-size: 20px !important;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.fs-28 {
+  font-size: 28px;
+}
+
+.fs-36 {
+  font-size: 36px;
+}
 
 /*
 * Main wrapper, main layout style
@@ -33,29 +72,29 @@
 }
 
 #sidebar-wrapper {
-min-height: 100vh;
-margin-left: -15rem;
--webkit-transition: margin .25s ease-out;
--moz-transition: margin .25s ease-out;
--o-transition: margin .25s ease-out;
-transition: margin .25s ease-out;
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
 }
 
 #sidebar-wrapper .sidebar-heading {
-padding: 0.875rem 1.25rem;
-font-size: 1.2rem;
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
 }
 
 #sidebar-wrapper .list-group {
-width: 15rem;
+  width: 15rem;
 }
 
 #page-content-wrapper {
-min-width: 100vw;
+  min-width: 100vw;
 }
 
 #wrapper.toggled #sidebar-wrapper {
-margin-left: 0;
+  margin-left: 0;
 }
 
 /*

@@ -1,0 +1,43 @@
+<div class="bg-white m-3 justify-self-center set-div mt-3">
+  <div class="d-flex justify-content-center">
+    <div class="d-flex">
+      <div class="d-flex justify-content-end flex-column pr-3">
+        <div class="d-flex fs-20 justify-content-end">You're adding</div>
+        <div class="d-flex font-weight-bold fs-28 justify-content-end">
+          <span class="float-right text-warning">Role</span>
+        </div>
+      </div>
+    </div>
+    <div style="width: 85%">
+      <div class="form-group">
+        <div class="form-group d-flex">
+          <div class="d-flex flex-column w-100">
+            <label for="exampleFormControlInput1">Role name</label>
+            <div class="d-flex flex-row">
+              <input
+                [(ngModel)]="name"
+                type="subtitle"
+                class="form-control fs-14"
+                id="exampleFormControlInput1"
+                placeholder="Post maker"
+              />
+            </div>
+          </div>
+          <div class="d-flex pl-2">
+            <button type="button" class="btn btn-primary" (click)="addRole()">
+              Update
+            </button>
+          </div>
+        </div>
+        <hr style="background-color: #007bff" />
+        <angular-editor
+          style="background-color: rgba(0, 0, 0, 0.1)"
+          [(ngModel)]="description"
+          [placeholder]="description"
+          [config]="editorConfig"
+        >
+        </angular-editor>
+      </div>
+    </div>
+  </div>
+</div>

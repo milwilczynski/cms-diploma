@@ -1,0 +1,99 @@
+<div class="container d-flex justify-content-between w-50 mt-5 mb-5 fs-12">
+  <div class="d-flex justify-content-center flex-column">
+    <img src="assets/modern.png" class="rounded mx-auto d-block" alt="..." />
+    <div
+      class="form-check form-check-inline font-weight-bold w-100 fs-12 justify-content-center"
+    >
+      <input
+        class="form-check-input mt-1"
+        type="radio"
+        name="inlineRadioOptions"
+        id="modern"
+        value="modern"
+        [checked]="layout == 'modern'"
+        (click)="updateLayout($event.target.value)"
+      />
+      <label class="form-check-label fs-12 mt-1" for="modern">Modern</label>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center flex-column">
+    <img
+      src="assets/navbarbottom.png"
+      class="rounded mx-auto d-block"
+      alt="..."
+      for="inlineRadio2"
+    />
+    <div
+      class="form-check form-check-inline fs-14 font-weight-bold w-100 justify-content-center"
+    >
+      <input
+        class="form-check-input mt-1"
+        type="radio"
+        name="inlineRadioOptions"
+        id="navbarbottom"
+        value="navbarbottom"
+        [checked]="layout == 'navbarbottom'"
+        (click)="updateLayout($event.target.value)"
+      />
+      <label class="form-check-label fs-12 mt-1" for="navbarbottom"
+        >Navbar bottom</label
+      >
+    </div>
+  </div>
+  <div class="d-flex justify-content-center flex-column">
+    <img src="assets/menuleft.png" class="rounded mx-auto d-block" alt="..." />
+    <div
+      class="form-check form-check-inline fs-14 font-weight-bold w-100 justify-content-center"
+    >
+      <input
+        class="form-check-input mt-1"
+        type="radio"
+        name="inlineRadioOptions"
+        id="menuleft"
+        value="menuleft"
+        [checked]="layout == 'menuleft'"
+        (click)="updateLayout($event.target.value)"
+      />
+      <label class="form-check-label mt-1 fs-12" for="menuleft"
+        >Menu on left</label
+      >
+    </div>
+  </div>
+  <div class="d-flex justify-content-center flex-column">
+    <img src="assets/menuright.png" class="rounded mx-auto d-block" alt="..." />
+    <div
+      class="form-check form-check-inline fs-14 font-weight-bold w-100 justify-content-center"
+    >
+      <input
+        class="form-check-input mt-1"
+        type="radio"
+        name="inlineRadioOptions"
+        id="menuright"
+        value="menuright"
+        [checked]="layout == 'menuright'"
+        (click)="updateLayout($event.target.value)"
+      />
+      <label class="form-check-label fs-12 mt-1" for="menuright"
+        >Menu on right</label
+      >
+    </div>
+  </div>
+</div>
+<div class="container d-flex justify-content-center w-50 mt-5 mb-5 fs-12">
+  <div
+    class="form-check form-check-inline fs-14 font-weight-bold w-100 justify-content-center"
+  >
+    <input
+      class="form-check-input mt-1"
+      type="checkbox"
+      name="inlineRadioOptions"
+      id="isHeader"
+      value="isHeader"
+      [checked]="isHeader"
+      (click)="updateHeader()"
+    />
+    <label class="form-check-label fs-12 mt-1" for="isHeader"
+      >Allow header</label
+    >
+  </div>
+</div>

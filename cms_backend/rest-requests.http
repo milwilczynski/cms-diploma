@@ -1,49 +1,333 @@
+##############
+#### USER ####
+##############
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibG9naW4iOiJhZG1pbiIsIm5hbWUiOiJhZG1pbiIsInN1cm5hbWUiOiJhZG1pbiIsImlhdCI6MTYxMjU1ODkzMn0.fg_jDOPxzIr7cgILdvXvJaBzZpr9TC1y05wWXR_hFjw
 ###
 #Shows all users in db
 ###
 GET http://localhost:8080/api/user
+X-Auth-Token: {{authToken}}
 
 ###
-#Creates User
+#Gets one user from db
 ###
-POST http://localhost:8080/api/user/create HTTP/1.1
+GET http://localhost:8080/api/user/49
+
+###
+#Gets users by role
+###
+GET http://localhost:8080/api/role/3/user
+
+###
+#Deletes user by id
+###
+DELETE http://localhost:8080/api/user/3
+
+###
+#Adds user to db
+###
+PUT http://localhost:8080/api/user
 content-type: application/json
 
 {
-    "login": "test",
+    "login": "test13",
     "password": "test",
-    "email": "test@gmail.com",
+    "email": "test14@gmail.com",
     "name": "milek",
-    "surname": "wilk"
+    "surname": "wilk",
+    "roles": [
+        {
+            "id": 1,
+            "value": true
+        },
+        {
+            "id": 2, 
+            "value": true
+        }
+    ]
 }
+
+###
+#Edits user
+###
+POST http://localhost:8080/api/user
+content-type: application/json
+
+{
+
+}
+
+###
+#Gets dashboard
+###
+GET http://localhost:8080/api/user-dashboard
+
 
 
 ###
 #Login for User with JWT response
 ###
-POST http://localhost:8080/api/user/auth HTTP/1.1
+POST http://localhost:8080/api/user-auth HTTP/1.1
 content-type: application/json
 
 {
-    "emailorlogin": "te1st",
-    "password": "test"
+    "emailorlogin": "admin",
+    "password": "admin"
 }
 
+##############
+#### ROLES ###
+##############
+
+###
+#Shows all roles in db
+###
+GET http://localhost:8080/api/roles
+
+###
+#Gets one role by id from db
+###
+GET http://localhost:8080/api/roles/1
+
+###
+#Gets roles dashboard
+###
+GET http://localhost:8080/api/roles-dashboard
+
+###
+#Adds new role into db
+###
+PUT http://localhost:8080/api/roles
+content-type: application/json
+
+{
+    "name": "Posterrr",
+    "description": "Post manager can edit any post and comment within db"
+}
+
+###
+#Updates selected role in db
+###
+POST http://localhost:8080/api/roles/update
+content-type: application/json
+
+{
+    "id": 19,
+    "name": "Posterrrr",
+    "description": "Post manager can edit any post and comment within db"
+}
+
+###
+#Deletes a role by id from db
+###
+DELETE http://localhost:8080/api/roles/10
+
+
+##############
+#### HTML ####
+##############
+
+###
+#Gets DOM selector content from html file
 ###
 POST http://localhost:8080/api/sites/htmlcontent HTTP/1.1
 content-type: application/json
 
 {
-    "dom": "#footer",
-    "file": "index.html"
+    "dom": "#wrapper",
+    "url": "public\\sites\\index.html"
 }
 
+###
+#Updates DOM selector content within html file
 ###
 POST http://localhost:8080/api/sites/htmlcontent/update HTTP/1.1
 content-type: application/json
 
 {
-    "dom": "#footer",
-    "content": "Zmieniony fo2oter :)",
-    "file": "index.html"
+    "dom": "#wrapper",
+    "content": "<h1>SIEMA BYCZKU IKSDE</h1>",
+    "file": "public\\sites\\index.html"
 }
+
+###
+#Deletes html file from public/sites then from db
+###
+DELETE http://localhost:8080/api/sites/5/delete HTTP/1.1
+content-type: application/json
+
+###
+#Gets all html 
+###
+GET http://localhost:8080/api/sites HTTP/1.1
+X-Auth-Token: {{authToken}}
+content-type: application/json
+
+###
+#Gets main html
+###
+GET http://localhost:8080/api/sites-main HTTP/1.1
+content-type: application/json
+
+
+###
+#
+###
+GET http://localhost:8080/api/sites/3 HTTP/1.1
+content-type: application/json
+
+###
+#Change site to be in navbar
+###
+GET http://localhost:8080/api/sites/5/navigation HTTP/1.1
+content-type: application/json
+
+###############
+#### POSTS ####
+###############
+
+###
+#Gets all posts
+###
+GET http://localhost:8080/api/posts HTTP/1.1
+content-type: application/json
+
+###
+#Gets all posts within one siteId
+###
+GET http://localhost:8080/api/posts/5 HTTP/1.1
+content-type: application/json
+
+###
+#Gets all posts to dashboard
+###
+GET http://localhost:8080/api/postsdashboard HTTP/1.1
+content-type: application/json
+
+###
+#Adds post
+###
+POST http://localhost:8080/api/posts/add HTTP/1.1
+content-type: application/json
+
+{
+    "siteId": 8,
+    "userId": 1,
+    "title": "Nowy post",
+    "subtitle": "Testowy taki",
+    "content": "delma sola pyszniejsza jest :)"
+}
+
+###
+#Deletes post
+###
+GET http://localhost:8080/api/posts/4/delete HTTP/1.1
+content-type: application/json
+
+###
+#Edits posts
+###
+POST http://localhost:8080/api/posts/edit HTTP/1.1
+content-type: application/json
+
+{
+    "id": 4,
+    "title": "Post",
+    "subtitle": "Testowy taki",
+    "content": "delma sola pyszniejsza jest :)"
+}
+
+###
+#Gets one post
+###
+GET http://localhost:8080/api/posts/6/post HTTP/1.1
+content-type: application/json
+
+###
+#Gets posts by name
+###
+GET http://localhost:8080/api/posts-bysitename/index HTTP/1.1
+content-type: application/json
+
+###
+#Gets dashboard
+###
+GET http://localhost:8080/api/posts/dashboard/post HTTP/1.1
+content-type: application/json
+
+###
+#Counts posts
+###
+GET http://localhost:8080/api/posts/dashboard/count HTTP/1.1
+content-type: application/json
+
+##################
+#### COMMENTS ####
+##################
+
+###
+#Gets all comments
+###
+GET http://localhost:8080/api/comments HTTP/1.1
+content-type: application/json
+
+###
+#Gets all comments within one pageId
+###
+GET http://localhost:8080/api/comments/5 HTTP/1.1
+content-type: application/json
+
+###
+#Gets all comments within one postId
+###
+GET http://localhost:8080/api/comments/posts/6 HTTP/1.1
+content-type: application/json
+
+###
+#Adds comment
+###
+POST http://localhost:8080/api/comments/add HTTP/1.1
+content-type: application/json
+
+{
+    "postId": 6,
+    "nickname": "Byczek12",
+    "title": "Nowy komentarz",
+    "content": "delma sola pyszniejsza jest :)"
+}
+
+###
+#Deletes comment
+###
+GET http://localhost:8080/api/comments/4/delete HTTP/1.1
+content-type: application/json
+
+###
+#Edits comment
+###
+POST http://localhost:8080/api/comments/edit HTTP/1.1
+content-type: application/json
+
+{
+    "id": 5,
+    "title": "Edytowany komentarz",
+    "content": "delma sola pyszniejsza jest (:)"
+}
+
+###
+#Gets single comment
+###
+GET http://localhost:8080/api/comments/10/comment HTTP/1.1
+content-type: application/json
+
+###
+#Gets dashboard
+###
+GET http://localhost:8080/api/comments/dashboard/comment HTTP/1.1
+content-type: application/json
+
+######
+###SETTINGS
+####
+GET http://localhost:8080/api/settings HTTP/1.1
+content-type: application/json

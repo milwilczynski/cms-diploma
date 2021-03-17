@@ -27,7 +27,7 @@ export default {
     if (error instanceof ApplicationException) {
       response
         .status(error.error.code)
-        .send(error.message || error.error.message);
+        .send(error);
     } else {
       console.error((error && error.stack) || error);
       response.sendStatus(500);

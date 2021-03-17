@@ -1,6 +1,6 @@
-"use strict";
-const { Model } = require("sequelize");
-const {  ValidationError,  Op } = require("sequelize");
+'use strict';
+const { Model } = require('sequelize');
+const { ValidationError, Op } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -10,10 +10,22 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      User.belongsToMany(models.role, {
+        through: 'user_roles',
+        foreignKey: 'userId',
+        otherKey: 'roleId',
+      });
       User.hasOne(models.user_passwords, {
         foreignKey: {
-          name: "userId", allowNull: false
-        }
+          name: 'userId',
+          allowNull: false,
+        },
+      });
+      User.hasOne(models.post, {
+        foreignKey: {
+          name: 'userId',
+          allowNull: false,
+        },
       });
     }
   }
@@ -38,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "user",
+      modelName: 'user',
       validate: {
         async isEmailOrLoginUnique() {
           const user = await User.findOne({
@@ -47,14 +59,12 @@ module.exports = (sequelize, DataTypes) => {
             },
           });
           if (user) {
-            throw new Error("Email or Login already in use!");
+            throw new Error('Email or Login already in use!');
           }
         },
       },
-    }
+    },
   );
 
-
   return User;
-    
 };

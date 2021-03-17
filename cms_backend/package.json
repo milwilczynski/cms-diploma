@@ -9,7 +9,8 @@
     "clean": "rm -rf build && mkdir build",
     "build": "npm run clean && babel src --out-dit build",
     "start": "node build/app.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon ./src/index.js",
+    "test": "jest"
   },
   "author": "Milosz Wilczynski",
   "license": "ISC",
@@ -22,6 +23,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.0",
+    "multer": "^1.4.2",
     "pg": "^8.5.0",
     "pg-hstore": "^2.3.3",
     "regenerator-runtime": "^0.13.7",
@@ -29,18 +31,22 @@
     "serve-index": "^1.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.7",
+    "@babel/core": "^7.12.13",
     "@babel/node": "^7.12.6",
-    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-env": "^7.12.13",
     "@babel/register": "^7.12.1",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.6.3",
     "cors": "^2.8.5",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.6",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^6.1.3",
+    "whatwg-fetch": "^3.5.0"
   }
 }
